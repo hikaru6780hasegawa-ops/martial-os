@@ -16,13 +16,9 @@
 body{font-family:-apple-system,'Hiragino Sans','Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
 a{color:inherit;text-decoration:none}
 button{cursor:pointer;font:inherit;border:none;background:none}
-
-/* Layout */
 .layout{display:flex;min-height:100vh}
 .sidebar{width:var(--sidebar-w);background:var(--card);border-right:1px solid var(--border);padding:24px 16px;display:flex;flex-direction:column;position:fixed;height:100vh;overflow-y:auto;z-index:10}
 .main{margin-left:var(--sidebar-w);flex:1;padding:32px 40px;max-width:1200px}
-
-/* Sidebar */
 .logo-area{display:flex;align-items:center;gap:12px;margin-bottom:32px;padding:0 4px}
 .logo-mark{width:40px;height:40px;background:var(--red);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px}
 .logo-text{font-size:15px;font-weight:700;color:var(--navy);line-height:1.2}
@@ -36,8 +32,6 @@ button{cursor:pointer;font:inherit;border:none;background:none}
 .nav-badge{margin-left:auto;background:var(--red);color:#fff;font-size:11px;font-weight:600;padding:2px 7px;border-radius:10px}
 .sidebar-footer{margin-top:auto;padding:16px 12px;border-top:1px solid var(--border);font-size:12px;color:var(--sub);line-height:1.5}
 .sidebar-footer .motto{font-style:italic;color:var(--navy);font-weight:500}
-
-/* Header */
 .greeting{margin-bottom:24px}
 .greeting-date{font-size:13px;color:var(--sub);margin-bottom:4px}
 .greeting-text{font-size:26px;font-weight:700;color:var(--navy);margin-bottom:4px}
@@ -47,8 +41,6 @@ button{cursor:pointer;font:inherit;border:none;background:none}
 .target-label{font-size:11px;font-weight:700;color:var(--red);letter-spacing:1px;margin-bottom:4px}
 .target-text{font-size:15px;color:var(--text)}
 .target-text strong{font-size:24px;color:var(--red);font-weight:800}
-
-/* Search */
 .search-area{margin-bottom:28px}
 .search-box{display:flex;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:4px 4px 4px 16px;box-shadow:var(--shadow);transition:border-color .2s}
 .search-box:focus-within{border-color:var(--navy)}
@@ -57,10 +49,8 @@ button{cursor:pointer;font:inherit;border:none;background:none}
 .search-btn{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;transition:background .15s}
 .search-btn.voice{background:var(--red);color:#fff}
 .search-btn.voice:hover{background:#A31830}
-
-/* Section */
 .section{margin-bottom:32px}
-.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
 .section-title{font-size:13px;font-weight:700;color:var(--red);letter-spacing:1px;text-transform:uppercase}
 .section-title-main{font-size:20px;font-weight:700;color:var(--navy)}
 .section-more{font-size:13px;color:var(--sub);display:flex;align-items:center;gap:4px}
@@ -71,8 +61,6 @@ button{cursor:pointer;font:inherit;border:none;background:none}
 .refresh-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;background:var(--card);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--sub)}
 .refresh-btn:hover{color:var(--navy);border-color:var(--navy)}
 .refresh-btn[disabled]{opacity:.55;cursor:wait}
-
-/* KPI Grid */
 .kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:16px}
 .kpi-card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);text-align:center}
 .kpi-value{font-size:28px;font-weight:800;color:var(--navy);line-height:1.2}
@@ -82,14 +70,11 @@ button{cursor:pointer;font:inherit;border:none;background:none}
 .kpi-card.period{background:var(--navy);color:#fff}
 .kpi-card.period .kpi-value{color:#fff}
 .kpi-card.period .kpi-label,.kpi-card.period .kpi-sub{color:rgba(255,255,255,.7)}
-
-/* Action cards */
 .action-list{display:flex;flex-direction:column;gap:10px}
 .action-card{display:flex;align-items:stretch;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;cursor:pointer;transition:box-shadow .15s}
 .action-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.1)}
 .action-priority{width:5px;flex-shrink:0}
-.action-priority.urgent{background:#EF4444}
-.action-priority.action{background:var(--orange)}
+.action-priority.urgent,.action-priority.action{background:#EF4444}
 .action-priority.watch{background:var(--blue)}
 .action-body{flex:1;padding:14px 18px;display:flex;align-items:center;gap:16px;min-width:0}
 .action-main{flex:1;min-width:0}
@@ -97,11 +82,8 @@ button{cursor:pointer;font:inherit;border:none;background:none}
 .action-meta{font-size:12px;color:var(--sub);margin-top:2px;display:flex;gap:12px;flex-wrap:wrap}
 .action-amount{font-size:14px;font-weight:700;color:var(--navy);white-space:nowrap}
 .action-badge{font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;white-space:nowrap}
-.action-badge.urgent{background:#FEE2E2;color:#991B1B}
-.action-badge.action{background:#FEF3C7;color:#92400E}
+.action-badge.urgent,.action-badge.action{background:#FEE2E2;color:#991B1B}
 .action-badge.watch{background:#DBEAFE;color:#1E40AF}
-
-/* Pipeline flow */
 .pipe-flow{display:flex;gap:2px;margin-bottom:16px;overflow-x:auto}
 .pipe-step{flex:1;min-width:100px;background:var(--card);padding:12px 8px;text-align:center;cursor:pointer;transition:background .15s;border:2px solid transparent;position:relative}
 .pipe-step:first-child{border-radius:var(--radius) 0 0 var(--radius)}
@@ -112,14 +94,10 @@ button{cursor:pointer;font:inherit;border:none;background:none}
 .pipe-step-label{font-size:11px;color:var(--sub);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pipe-step-amount{font-size:11px;color:var(--navy);font-weight:600;margin-top:2px}
 .pipe-step-bar{height:4px;border-radius:2px;margin-top:6px}
-
-/* Status colors */
 .status-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;flex-shrink:0}
 .c-blue{background:var(--blue)}.c-green{background:var(--green)}
 .c-orange{background:var(--orange)}.c-yellow{background:var(--yellow)}
 .c-red{background:#EF4444}.c-gray{background:#9CA3AF}
-
-/* Deal filters & table */
 .deal-filters{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
 .deal-filter{padding:6px 12px;border-radius:6px;font-size:12px;color:var(--sub);background:var(--card);border:1px solid var(--border);transition:all .15s}
 .deal-filter:hover,.deal-filter.active{background:var(--navy);color:#fff;border-color:var(--navy)}
@@ -138,8 +116,6 @@ button{cursor:pointer;font:inherit;border:none;background:none}
 .deal-table tr:hover td{background:var(--hover)}
 .deal-table tbody tr{cursor:pointer}
 .deal-table .amt{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
-
-/* Drawer */
 .drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:80}
 .drawer-overlay.show{display:block}
 .deal-drawer{position:fixed;right:0;top:0;width:min(480px,92vw);height:100vh;background:#fff;z-index:90;transform:translateX(100%);transition:transform .2s;box-shadow:-8px 0 30px rgba(0,0,0,.14);overflow:auto;padding:24px}
@@ -153,33 +129,23 @@ button{cursor:pointer;font:inherit;border:none;background:none}
 .detail-value{font-size:14px;font-weight:600;word-break:break-word}
 .drawer-nav{display:flex;justify-content:space-between;margin-top:20px}
 .drawer-nav button{padding:8px 14px;border:1px solid var(--border);border-radius:8px}
-
-/* Quality */
 .quality-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
 .quality-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:13px;text-align:left;cursor:pointer}
 .quality-card:hover{border-color:var(--navy)}
 .quality-count{font-size:24px;font-weight:800}
 .quality-label{font-size:12px;color:var(--sub)}
-
-/* Monthly cards */
 .monthly-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
 .monthly-card{background:var(--card);border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow);cursor:pointer;transition:transform .15s}
 .monthly-card:hover{transform:translateY(-1px)}
 .month-label{font-size:15px;font-weight:600;margin-bottom:4px}
 .month-meta{font-size:13px;color:var(--sub)}
-
-/* Rep stats */
 .rep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
 .rep-card{background:var(--card);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow);cursor:pointer}
 .rep-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.1)}
 .rep-name{font-size:14px;font-weight:600;margin-bottom:6px}
 .rep-stats{display:flex;gap:12px;font-size:12px;color:var(--sub)}
 .rep-stat-val{font-weight:700;color:var(--navy)}
-
-/* Schedule */
 .schedule-placeholder{text-align:center;padding:20px;color:var(--sub);font-size:13px;background:var(--card);border-radius:var(--radius);border:1px dashed var(--border)}
-
-/* Apps */
 .filter-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
 .filter-btn{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:500;color:var(--sub);background:var(--card);border:1px solid var(--border);transition:all .15s}
 .filter-btn:hover,.filter-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
@@ -196,34 +162,83 @@ button{cursor:pointer;font:inherit;border:none;background:none}
 .app-icon.system{background:#F3F4F6;color:#374151}
 .app-name{font-size:14px;font-weight:600;color:var(--text)}
 .app-desc{font-size:12px;color:var(--sub);line-height:1.4}
-
-/* Pillars */
 .pillars{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
 .pillar{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--navy);font-weight:500}
 .pillar-dot{width:8px;height:8px;border-radius:50%;background:var(--red)}
-
+/* Timeline */
+.timeline-list{display:flex;flex-direction:column;gap:8px}
+.tl-item{display:flex;gap:12px;background:var(--card);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);align-items:flex-start}
+.tl-time{min-width:54px;font-size:13px;font-weight:600;color:var(--navy);flex-shrink:0}
+.tl-body{flex:1;min-width:0}
+.tl-title{font-size:14px;font-weight:600}
+.tl-meta{font-size:12px;color:var(--sub);margin-top:2px;display:flex;gap:8px;flex-wrap:wrap}
+.tl-badge{font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;white-space:nowrap}
+.tl-badge.cal{background:#DBEAFE;color:#1E40AF}
+.tl-badge.deal{background:#FEE2E2;color:#991B1B}
+.tl-badge.slack{background:#E0E7FF;color:#3730A3}
+.tl-item.past{opacity:.55}
+.tl-item.now{border-left:4px solid var(--green)}
+.tl-item.next{border-left:4px solid var(--blue)}
+.tl-meet{display:inline-flex;align-items:center;gap:4px;background:var(--green);color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;margin-top:4px}
+/* Calendar events */
+.cal-list{display:flex;flex-direction:column;gap:8px}
+.cal-event{background:var(--card);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);display:flex;gap:12px;align-items:flex-start}
+.cal-event.past{opacity:.5}
+.cal-event.now{border-left:4px solid var(--green)}
+.cal-time{min-width:60px;font-size:13px;font-weight:600;color:var(--navy);flex-shrink:0}
+.cal-body{flex:1;min-width:0}
+.cal-title{font-size:14px;font-weight:600}
+.cal-loc{font-size:12px;color:var(--sub);margin-top:2px}
+/* Slack */
+.slack-list{display:flex;flex-direction:column;gap:8px}
+.slack-msg{background:var(--card);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow)}
+.slack-msg.mention{border-left:4px solid var(--orange)}
+.slack-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.slack-avatar{width:28px;height:28px;border-radius:6px;object-fit:cover}
+.slack-avatar-placeholder{width:28px;height:28px;border-radius:6px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--sub)}
+.slack-user{font-size:13px;font-weight:600}
+.slack-ch{font-size:11px;color:var(--sub)}
+.slack-ts{font-size:11px;color:var(--sub);margin-left:auto}
+.slack-text{font-size:13px;line-height:1.5;word-break:break-word;max-height:60px;overflow:hidden;transition:max-height .2s}
+.slack-text.expanded{max-height:none}
+.slack-expand{font-size:11px;color:var(--blue);cursor:pointer;margin-top:4px}
+.slack-footer{display:flex;gap:12px;margin-top:6px;font-size:11px;color:var(--sub)}
+.slack-filter-bar{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+/* Notification center */
+.notif-icon{position:relative;padding:8px;font-size:20px;cursor:pointer}
+.notif-badge{position:absolute;top:2px;right:2px;background:var(--red);color:#fff;font-size:10px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px}
+.notif-badge:empty{display:none}
+.notif-panel{display:none;position:fixed;right:16px;top:60px;width:min(400px,90vw);max-height:70vh;overflow-y:auto;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,.15);z-index:70;padding:16px}
+.notif-panel.show{display:block}
+.notif-item{display:flex;gap:10px;padding:10px;border-radius:8px;cursor:pointer;transition:background .15s;align-items:flex-start}
+.notif-item:hover{background:var(--hover)}
+.notif-item.unread{font-weight:600}
+.notif-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.notif-text{font-size:13px;flex:1;min-width:0}
+.notif-time{font-size:11px;color:var(--sub);white-space:nowrap}
 /* Voice modal */
 .voice-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:center;justify-content:center}
 .voice-modal.show{display:flex}
-.voice-inner{background:var(--card);border-radius:20px;padding:48px;text-align:center;max-width:360px;width:90%}
+.voice-inner{background:var(--card);border-radius:20px;padding:48px;text-align:center;max-width:400px;width:90%}
 .voice-circle{width:80px;height:80px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:32px;color:#fff;animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:.8}}
-.voice-text{font-size:16px;color:var(--text);margin-bottom:20px}
-.voice-close{padding:10px 24px;background:var(--bg);border-radius:8px;font-size:14px;color:var(--sub)}
-
-/* User menu */
+.voice-text{font-size:16px;color:var(--text);margin-bottom:12px;min-height:24px}
+.voice-result{font-size:14px;color:var(--navy);font-weight:600;margin-bottom:12px;min-height:20px}
+.voice-action{font-size:13px;color:var(--sub);margin-bottom:16px;min-height:18px}
+.voice-buttons{display:flex;gap:8px;justify-content:center}
+.voice-buttons button{padding:10px 24px;border-radius:8px;font-size:14px}
+.voice-buttons .exec{background:var(--navy);color:#fff}
+.voice-buttons .cancel{background:var(--bg);color:var(--sub)}
+.voice-cmd-input{width:100%;border:1px solid var(--border);border-radius:8px;padding:10px;font-size:14px;margin-top:12px;text-align:center}
+/* User */
 .user-area{display:flex;align-items:center;gap:12px;padding:16px 12px;margin-top:12px;border-radius:8px;cursor:pointer}
 .user-area:hover{background:var(--hover)}
 .user-avatar{width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
 .user-name{font-size:14px;font-weight:600}
 .user-role{font-size:11px;color:var(--sub)}
-
-/* Mobile overlay */
 .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:40}
 .sidebar-overlay.show{display:block}
 body.menu-open{overflow:hidden}
-
-/* Mobile */
 @media(max-width:768px){
   .sidebar{display:none;position:fixed;left:0;top:0;width:280px;height:100vh;z-index:50;overflow-y:auto}
   .sidebar.open{display:flex}
@@ -243,14 +258,13 @@ body.menu-open{overflow:hidden}
   .rep-grid{grid-template-columns:repeat(2,1fr)}
   .filter-panel{grid-template-columns:1fr 1fr}
   .deal-drawer{width:100vw}
+  .notif-panel{right:8px;top:50px;width:calc(100vw - 16px);max-height:80vh}
+  .slack-text{max-height:48px}
 }
-@media(min-width:769px){
-  .mobile-header{display:none !important}
-}
+@media(min-width:769px){.mobile-header{display:none !important}}
 </style>
 </head>
 <body>
-
 <div class="layout">
   <aside class="sidebar" id="sidebar">
     <div class="logo-area"><div class="logo-mark">M</div><div class="logo-text">Martial OS<small>株式会社 Martial Arts</small></div></div>
@@ -258,8 +272,10 @@ body.menu-open{overflow:hidden}
       <div class="nav-section">
         <div class="nav-label">メイン</div>
         <a class="nav-item active" href="#"><span class="icon">🏠</span>ダッシュボード</a>
+        <a class="nav-item" href="#timeline"><span class="icon">📌</span>今日のタイムライン</a>
         <a class="nav-item" href="#actions"><span class="icon">🔥</span>今日のアクション<span class="nav-badge" id="action-badge">-</span></a>
-        <a class="nav-item" href="#schedule"><span class="icon">📅</span>今日の予定</a>
+        <a class="nav-item" href="#calendar-section"><span class="icon">📅</span>今日の予定</a>
+        <a class="nav-item" href="#slack-section"><span class="icon">💬</span>Slack最新情報</a>
         <a class="nav-item" href="#pipeline"><span class="icon">📊</span>パイプライン<span class="nav-badge" id="pipe-badge">-</span></a>
         <a class="nav-item" href="#deals"><span class="icon">📋</span>案件一覧</a>
         <a class="nav-item" href="#apps"><span class="icon">🔧</span>アプリ一覧</a>
@@ -277,38 +293,59 @@ body.menu-open{overflow:hidden}
 
   <main class="main">
     <div class="mobile-header">
-      <button id="menu-toggle" aria-expanded="false" aria-controls="sidebar" style="font-size:24px">☰</button>
+      <button id="menu-toggle" style="font-size:24px">☰</button>
       <div class="logo-area" style="margin:0"><div class="logo-mark" style="width:32px;height:32px;font-size:14px">M</div><div class="logo-text" style="font-size:13px">Martial OS</div></div>
-      <div style="width:24px"></div>
+      <div class="notif-icon" id="notif-icon-mobile" onclick="toggleNotif()">🔔<span class="notif-badge" id="notif-badge-mobile"></span></div>
     </div>
 
     <div class="greeting">
-      <div class="greeting-date" id="today-date"></div>
-      <div class="greeting-text" id="greeting-text"></div>
-      <div class="greeting-sub">今日やることと、会社のすべての入口をここに。</div>
-      <div class="shortcut-hint">ショートカット: / 検索　Esc 閉じる　← → 案件移動</div>
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div class="greeting-date" id="today-date"></div>
+          <div class="greeting-text" id="greeting-text"></div>
+          <div class="greeting-sub">今日やることと、会社のすべての入口をここに。</div>
+          <div class="shortcut-hint">ショートカット: / 検索　Esc 閉じる　← → 案件移動</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <div class="notif-icon" id="notif-icon-desktop" onclick="toggleNotif()" style="display:none">🔔<span class="notif-badge" id="notif-badge-desktop"></span></div>
+          <button class="refresh-btn" id="refresh-btn" onclick="refreshAll(true)">↻ 今すぐ更新</button>
+        </div>
+      </div>
     </div>
 
     <div class="target-banner"><div class="target-label">TARGET 2030</div><div class="target-text">全社員の最低年収 <strong>1,000万円</strong>を実現</div></div>
 
-    <div class="search-area"><div class="search-box"><input type="text" id="search-input" placeholder="顧客名・アプリ名・やりたいことから探す" autocomplete="off"><button class="search-btn voice" onclick="openVoice()" aria-label="音声検索">🎙</button></div></div>
+    <div class="search-area"><div class="search-box"><input type="text" id="search-input" placeholder="顧客名・アプリ名・やりたいことから探す（コマンドも入力可能）" autocomplete="off"><button class="search-btn voice" onclick="openVoice()" aria-label="音声検索">🎙</button></div></div>
 
     <!-- KPI -->
     <div class="section" id="kpi">
-      <div class="section-header"><div><div class="section-title">KPI</div><div class="section-title-main">営業サマリー</div></div><div><div class="section-status" id="kpi-status"></div><button class="refresh-btn" id="refresh-btn" onclick="loadLiveData(true)">↻ 今すぐ更新</button></div></div>
+      <div class="section-header"><div><div class="section-title">KPI</div><div class="section-title-main">営業サマリー</div></div><div class="section-status" id="kpi-status"></div></div>
       <div class="kpi-grid" id="kpi-grid"><div class="section-loading">読み込み中...</div></div>
     </div>
 
-    <!-- Today's Actions -->
+    <!-- Timeline -->
+    <div class="section" id="timeline">
+      <div class="section-header"><div><div class="section-title">TODAY TIMELINE</div><div class="section-title-main">今日の統合タイムライン</div></div></div>
+      <div class="timeline-list" id="timeline-list"><div class="section-loading">読み込み中...</div></div>
+    </div>
+
+    <!-- Actions -->
     <div class="section" id="actions">
       <div class="section-header"><div><div class="section-title">TODAY'S ACTIONS</div><div class="section-title-main">対応が必要な案件</div></div></div>
       <div class="action-list" id="action-list"><div class="section-loading">読み込み中...</div></div>
     </div>
 
-    <!-- Schedule -->
-    <div class="section" id="schedule">
-      <div class="section-header"><div><div class="section-title">TODAY</div><div class="section-title-main">今日の予定</div></div></div>
-      <div class="schedule-placeholder">Googleカレンダー未設定 — 次フェーズで連携予定</div>
+    <!-- Calendar -->
+    <div class="section" id="calendar-section">
+      <div class="section-header"><div><div class="section-title">CALENDAR</div><div class="section-title-main">今日の予定</div></div><div><div class="section-status" id="cal-status"></div><a class="section-more" id="cal-open-link" href="https://calendar.google.com" target="_blank" rel="noopener">Googleカレンダーで開く →</a></div></div>
+      <div class="cal-list" id="cal-list"><div class="section-loading">読み込み中...</div></div>
+    </div>
+
+    <!-- Slack -->
+    <div class="section" id="slack-section">
+      <div class="section-header"><div><div class="section-title">SLACK</div><div class="section-title-main">Slack最新情報</div></div><div class="section-status" id="slack-status"></div></div>
+      <div class="slack-filter-bar" id="slack-filter-bar"></div>
+      <div class="slack-list" id="slack-list"><div class="section-loading">読み込み中...</div></div>
     </div>
 
     <!-- Pipeline -->
@@ -369,6 +406,10 @@ body.menu-open{overflow:hidden}
   </main>
 </div>
 
+<!-- Notification Panel -->
+<div class="notif-panel" id="notif-panel"></div>
+
+<!-- Drawer -->
 <div class="drawer-overlay" id="drawer-overlay"></div>
 <aside class="deal-drawer" id="deal-drawer" aria-hidden="true">
   <div class="drawer-header"><div><div class="section-title">DEAL DETAIL</div><div class="drawer-title" id="drawer-title"></div></div><button class="drawer-close" id="drawer-close" aria-label="閉じる">×</button></div>
@@ -376,9 +417,40 @@ body.menu-open{overflow:hidden}
   <div class="drawer-nav"><button id="drawer-prev">← 前の案件</button><button id="drawer-next">次の案件 →</button></div>
 </aside>
 
-<div class="voice-modal" id="voice-modal" onclick="closeVoice(event)"><div class="voice-inner" onclick="event.stopPropagation()"><div class="voice-circle">🎙</div><div class="voice-text">聞いています...</div><button class="voice-close" onclick="closeVoice()">閉じる</button></div></div>
+<!-- Voice -->
+<div class="voice-modal" id="voice-modal">
+  <div class="voice-inner" onclick="event.stopPropagation()">
+    <div class="voice-circle" id="voice-circle">🎙</div>
+    <div class="voice-text" id="voice-text">聞いています...</div>
+    <div class="voice-result" id="voice-result"></div>
+    <div class="voice-action" id="voice-action"></div>
+    <div class="voice-buttons" id="voice-buttons" style="display:none">
+      <button class="exec" onclick="executeVoiceCmd()">実行</button>
+      <button class="cancel" onclick="cancelVoice()">キャンセル</button>
+    </div>
+    <input class="voice-cmd-input" id="voice-cmd-input" type="text" placeholder="テキストでコマンド入力（音声非対応時）" style="display:none">
+    <button class="cancel" onclick="closeVoice()" style="margin-top:12px;padding:10px 24px;background:var(--bg);border-radius:8px;font-size:14px;color:var(--sub)">閉じる</button>
+  </div>
+</div>
 
 <script>
+const API='/api/data',CAL_API='/api/calendar',SLACK_API='/api/slack';
+let liveData=null,calData=null,slackData=null;
+let fetchController=null,refreshTimer=null;
+let filteredDeals=[],selectedDealId='',previousFocus=null;
+let dealFilter='all',dealSort={col:'amount',dir:-1};
+const dealFilters={q:'',status:'',rep:'',bank:'',amount:'',priority:'',active:false,needsAction:false};
+let slackFilter='all';
+let notifications=[];
+
+function esc(v){const d=document.createElement('div');d.textContent=String(v??'');return d.innerHTML}
+function fmtMan(v){if(!v&&v!==0)return'-';const n=typeof v==='number'?v:parseInt(String(v).replace(/[,万円\s]/g,''))||0;return n>=10000?(n/10000).toFixed(1).replace(/\.0$/,'')+'億円':n.toLocaleString()+'万円'}
+function sectionError(id,msg){const el=document.getElementById(id);if(el)el.innerHTML=`<div class="section-error"><span>取得エラー: ${esc(msg)}</span><button onclick="refreshAll()">再試行</button></div>`}
+function fmtTime(iso){if(!iso)return'';try{return new Date(iso).toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Tokyo'})}catch{return''}}
+function fmtSlackTs(ts){if(!ts)return'';try{return new Date(parseFloat(ts)*1000).toLocaleString('ja-JP',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'Asia/Tokyo'})}catch{return''}}
+function nowTokyo(){return new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tokyo'}))}
+
+// --- APPS ---
 const APPS=[
   {name:'顧客管理',desc:'顧客情報・ランク・担当を一覧管理',icon:'👥',cat:'sales',url:'https://ma-customer-master.netlify.app/'},
   {name:'アポ報告',desc:'アポイント報告・スコアリング',icon:'📞',cat:'sales',url:'#'},
@@ -400,46 +472,36 @@ const APPS=[
 let currentFilter='all';
 function renderApps(f){const g=document.getElementById('apps-grid'),q=document.getElementById('search-input').value.toLowerCase();g.innerHTML=APPS.filter(a=>(f==='all'||a.cat===f)&&(!q||a.name.toLowerCase().includes(q)||a.desc.toLowerCase().includes(q))).map(a=>`<a class="app-card" href="${a.url}" target="_blank" rel="noopener"><div class="app-icon ${a.cat}">${a.icon}</div><div class="app-name">${a.name}</div><div class="app-desc">${a.desc}</div></a>`).join('')}
 function filterApps(c,b){currentFilter=c;document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');renderApps(c)}
-function openVoice(){document.getElementById('voice-modal').classList.add('show')}
-function closeVoice(e){if(!e||e.target===document.getElementById('voice-modal'))document.getElementById('voice-modal').classList.remove('show')}
 
-// Mobile Menu
+// --- Mobile Menu ---
 const sidebarEl=document.getElementById('sidebar'),overlayEl=document.getElementById('sidebar-overlay'),menuBtn=document.getElementById('menu-toggle');
-function openMenu(){sidebarEl.classList.add('open');overlayEl.classList.add('show');document.body.classList.add('menu-open');menuBtn.setAttribute('aria-expanded','true')}
-function closeMenu(){sidebarEl.classList.remove('open');overlayEl.classList.remove('show');document.body.classList.remove('menu-open');menuBtn.setAttribute('aria-expanded','false')}
+function closeAllOverlays(){closeMenu();closeDeal();closeNotif()}
+function openMenu(){sidebarEl.classList.add('open');overlayEl.classList.add('show');document.body.classList.add('menu-open')}
+function closeMenu(){sidebarEl.classList.remove('open');overlayEl.classList.remove('show');document.body.classList.remove('menu-open')}
 menuBtn.addEventListener('click',()=>sidebarEl.classList.contains('open')?closeMenu():openMenu());
 overlayEl.addEventListener('click',closeMenu);
 sidebarEl.querySelectorAll('.nav-item').forEach(l=>l.addEventListener('click',closeMenu));
 window.matchMedia('(min-width:769px)').addEventListener('change',e=>{if(e.matches)closeMenu()});
 
+// --- Keyboard ---
 document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){closeVoice();closeMenu();if(selectedDealId)closeDeal()}
+  if(e.key==='Escape'){closeVoice();closeMenu();if(selectedDealId)closeDeal();closeNotif()}
   if(selectedDealId&&e.key==='ArrowLeft')moveDeal(-1);
   if(selectedDealId&&e.key==='ArrowRight')moveDeal(1);
   if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();document.getElementById('search-input').focus()}
 });
 
-// Greeting
+// --- Greeting ---
 (function(){
   const now=new Date(),days=['日','月','火','水','木','金','土'];
-  document.getElementById('today-date').textContent=now.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric'})+`（${days[now.getDay()]}）`;
-  const h=now.getHours();
+  document.getElementById('today-date').textContent=now.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric',timeZone:'Asia/Tokyo'})+`（${days[now.getDay()]}）`;
+  const h=parseInt(now.toLocaleTimeString('en-US',{hour:'numeric',hour12:false,timeZone:'Asia/Tokyo'}));
   document.getElementById('greeting-text').textContent=(h<12?'おはようございます':h<18?'お疲れさまです':'お疲れさまでした')+'、長谷川さん。';
+  if(window.innerWidth>=769)document.getElementById('notif-icon-desktop').style.display='';
 })();
 renderApps('all');
 
-// ===== LIVE DATA =====
-const API='/api/data';
-let liveData=null,fetchController=null,refreshTimer=null;
-let filteredDeals=[],selectedDealId='',previousFocus=null;
-let dealFilter='all',dealSort={col:'amount',dir:-1};
-const dealFilters={q:'',status:'',rep:'',bank:'',amount:'',priority:'',active:false,needsAction:false};
-
-function esc(v){const d=document.createElement('div');d.textContent=String(v??'');return d.innerHTML}
-function fmtMan(v){if(!v&&v!==0)return'-';const n=typeof v==='number'?v:parseInt(String(v).replace(/[,万円\s]/g,''))||0;return n>=10000?(n/10000).toFixed(1).replace(/\.0$/,'')+'億円':n.toLocaleString()+'万円'}
-function sectionError(id,msg){const el=document.getElementById(id);if(el)el.innerHTML=`<div class="section-error"><span>取得エラー: ${msg}</span><button onclick="loadLiveData()">再試行</button></div>`}
-
-// KPI
+// ===== KPI =====
 function renderKPI(data){
   const el=document.getElementById('kpi-grid'),d=data.dashboard||{},k=d.kpi||{},p=data.period||{},s=data.summary||{},t=s.total||{};
   const cards=[];
@@ -454,7 +516,7 @@ function renderKPI(data){
   if(d.lastUpdate)document.getElementById('kpi-status').textContent=`最終更新: ${d.lastUpdate}`;
 }
 
-// Actions
+// ===== ACTIONS =====
 function renderActions(deals){
   const el=document.getElementById('action-list'),active=(deals||[]).filter(d=>!d.completed);
   document.getElementById('action-badge').textContent=active.length||'0';
@@ -466,27 +528,104 @@ function renderActions(deals){
   }).join('');
 }
 
-// Pipeline
+// ===== PIPELINE =====
 function renderPipeFlow(summary){
   const el=document.getElementById('pipe-flow'),items=(summary&&summary.byStatus)||[],total=summary&&summary.total;
   if(total)document.getElementById('pipe-badge').textContent=total.count.replace(/[^0-9]/g,'');
   if(!items.length){el.innerHTML='<div class="section-loading">データなし</div>';return}
   const colors={blue:'var(--blue)',green:'var(--green)',orange:'var(--orange)',yellow:'var(--yellow)',red:'#EF4444',gray:'#9CA3AF'};
-  el.innerHTML=items.map(s=>`<div class="pipe-step" onclick="filterDealsByStatus('${esc(s.label)}')" tabindex="0" role="button"><div class="pipe-step-count">${s.count.replace(/[^0-9]/g,'')}</div><div class="pipe-step-label">${s.label}</div><div class="pipe-step-amount">${s.amount}</div><div class="pipe-step-bar" style="background:${colors[s.color]||'#9CA3AF'}"></div></div>`).join('');
+  el.innerHTML=items.map(s=>`<div class="pipe-step" onclick="filterDealsByStatus('${esc(s.label)}')" tabindex="0"><div class="pipe-step-count">${s.count.replace(/[^0-9]/g,'')}</div><div class="pipe-step-label">${s.label}</div><div class="pipe-step-amount">${s.amount}</div><div class="pipe-step-bar" style="background:${colors[s.color]||'#9CA3AF'}"></div></div>`).join('');
 }
-
 function renderMonthly(items){
   const el=document.getElementById('monthly-grid');
   if(!items||!items.length){el.innerHTML='';return}
   el.innerHTML=items.map(m=>`<div class="monthly-card"><div class="month-label">${m.label}</div><div class="month-meta">${m.count} | ${m.amount}</div>${m.note?`<div style="font-size:12px;color:var(--sub);margin-top:4px">${m.note}</div>`:''}</div>`).join('');
 }
 
-// Deals
+// ===== CALENDAR =====
+function renderCalendar(data){
+  const el=document.getElementById('cal-list');
+  if(!data||data.error==='not_configured'){el.innerHTML='<div class="schedule-placeholder">Googleカレンダー未設定 — 環境変数 GOOGLE_CALENDAR_ID を設定してください</div>';document.getElementById('cal-status').textContent='';return}
+  if(data.error){el.innerHTML=`<div class="section-error"><span>カレンダー取得エラー: ${esc(data.error)}</span><button onclick="loadCalendar()">再試行</button></div>`;return}
+  const events=data.events||[];
+  if(!events.length){el.innerHTML='<div class="schedule-placeholder">本日の予定はありません</div>';document.getElementById('cal-status').textContent=`${events.length}件 | 更新: ${fmtTime(data.updated)}`;return}
+  const now=nowTokyo();
+  el.innerHTML=events.map(ev=>{
+    let cls='',label='';
+    if(ev.allDay){cls='';label='終日'}
+    else{
+      const s=new Date(ev.start),e=new Date(ev.end);
+      if(now>=s&&now<=e){cls='now';label='進行中'}
+      else if(now>e){cls='past';label='終了'}
+      else{
+        const diff=Math.round((s-now)/60000);
+        label=diff<=30?`あと${diff}分`:'';
+        if(diff<=30)cls='next';
+      }
+    }
+    const time=ev.allDay?'終日':fmtTime(ev.start)+'〜'+fmtTime(ev.end);
+    return`<div class="cal-event ${cls}"><div class="cal-time">${time}</div><div class="cal-body"><div class="cal-title">${esc(ev.title)}${label?` <span style="font-size:11px;color:${cls==='now'?'var(--green)':cls==='next'?'var(--blue)':'var(--sub)'}">${label}</span>`:''}</div>${ev.location?`<div class="cal-loc">📍 ${esc(ev.location)}</div>`:''}${ev.meetLink?`<a class="tl-meet" href="${esc(ev.meetLink)}" target="_blank" rel="noopener">📹 Google Meet</a>`:''}</div></div>`;
+  }).join('');
+  document.getElementById('cal-status').textContent=`${events.length}件 | 更新: ${fmtTime(data.updated)}`;
+}
+
+// ===== SLACK =====
+function renderSlack(data){
+  const el=document.getElementById('slack-list'),fb=document.getElementById('slack-filter-bar');
+  if(!data||data.error==='not_configured'){el.innerHTML='<div class="schedule-placeholder">Slack未設定 — 環境変数 SLACK_BOT_TOKEN, SLACK_CHANNEL_IDS を設定してください</div>';fb.innerHTML='';document.getElementById('slack-status').textContent='';return}
+  if(data.error){el.innerHTML=`<div class="section-error"><span>Slack連携エラー: ${esc(data.error)}</span><button onclick="loadSlack()">再試行</button></div>`;fb.innerHTML='';return}
+  const msgs=data.messages||[];
+  if(!msgs.length){el.innerHTML='<div class="schedule-placeholder">最新の投稿はありません</div>';fb.innerHTML='';document.getElementById('slack-status').textContent=`更新: ${fmtTime(data.updated)}`;return}
+  const channels=[...new Set(msgs.map(m=>m.channelName))];
+  fb.innerHTML=[{k:'all',l:'すべて'},...channels.map(c=>({k:c,l:'#'+c}))].map(b=>`<button class="deal-filter${slackFilter===b.k?' active':''}" onclick="slackFilter='${esc(b.k)}';renderSlack(slackData)">${b.l}</button>`).join('');
+  const filtered=slackFilter==='all'?msgs:msgs.filter(m=>m.channelName===slackFilter);
+  el.innerHTML=filtered.slice(0,10).map((m,i)=>{
+    const avatar=m.userIcon?`<img class="slack-avatar" src="${esc(m.userIcon)}" alt="">`:`<div class="slack-avatar-placeholder">${esc((m.username||'?')[0])}</div>`;
+    return`<div class="slack-msg${m.isMention?' mention':''}"><div class="slack-header">${avatar}<span class="slack-user">${esc(m.username)}</span><span class="slack-ch">#${esc(m.channelName)}</span><span class="slack-ts">${fmtSlackTs(m.ts)}</span></div><div class="slack-text" id="slack-text-${i}">${esc(m.text)}</div>${m.text.length>100?`<div class="slack-expand" onclick="document.getElementById('slack-text-${i}').classList.toggle('expanded');this.textContent=this.textContent==='続きを読む'?'閉じる':'続きを読む'">続きを読む</div>`:''}<div class="slack-footer">${m.replyCount?`<span>💬 ${m.replyCount}件の返信</span>`:''}${m.threadTs&&m.threadTs!==m.ts?'<span>🔗 スレッド</span>':''}${m.hasAttachment?'<span>📎 添付</span>':''}${m.isMention?'<span style="color:var(--orange)">@メンション</span>':''}</div></div>`;
+  }).join('');
+  document.getElementById('slack-status').textContent=`${filtered.length}件 | 更新: ${fmtTime(data.updated)}`;
+}
+
+// ===== TIMELINE =====
+function renderTimeline(){
+  const el=document.getElementById('timeline-list'),items=[];
+  const now=nowTokyo(),todayStr=now.toLocaleDateString('ja-JP',{timeZone:'Asia/Tokyo'});
+  if(calData&&calData.events){
+    calData.events.forEach(ev=>{
+      const s=ev.allDay?null:new Date(ev.start),e=ev.allDay?null:new Date(ev.end);
+      let status='future';
+      if(s&&e){if(now>=s&&now<=e)status='now';else if(now>e)status='past'}
+      items.push({type:'cal',time:s||new Date(0),timeStr:ev.allDay?'終日':fmtTime(ev.start),title:ev.title,meta:ev.location||'',status,meetLink:ev.meetLink,priority:status==='now'?0:status==='past'?2:1,id:'cal-'+ev.id});
+    });
+  }
+  if(liveData&&liveData.deals){
+    liveData.deals.filter(d=>!d.completed&&d.priority==='action').forEach(d=>{
+      items.push({type:'deal',time:new Date(0),timeStr:'',title:d.customer,meta:`${d.status} | ${d.bank||'-'}`,status:'action',priority:0,id:'deal-'+d.id,dealId:d.id});
+    });
+  }
+  if(slackData&&slackData.messages){
+    slackData.messages.filter(m=>m.isMention).forEach(m=>{
+      items.push({type:'slack',time:new Date(parseFloat(m.ts)*1000),timeStr:fmtSlackTs(m.ts),title:`@メンション from ${m.username}`,meta:'#'+m.channelName+': '+m.text.slice(0,60),status:'mention',priority:0,id:'slack-'+m.ts});
+    });
+  }
+  const seen=new Set();
+  const unique=items.filter(i=>{if(seen.has(i.id))return false;seen.add(i.id);return true});
+  unique.sort((a,b)=>{if(a.priority!==b.priority)return a.priority-b.priority;return a.time-b.time});
+  if(!unique.length){el.innerHTML='<div class="schedule-placeholder">今日のイベントはありません</div>';return}
+  el.innerHTML=unique.slice(0,15).map(i=>{
+    const cls=i.status==='past'?'past':i.status==='now'?'now':i.status==='action'?'next':'';
+    const badge=i.type==='cal'?'<span class="tl-badge cal">Calendar</span>':i.type==='deal'?'<span class="tl-badge deal">案件</span>':'<span class="tl-badge slack">Slack</span>';
+    const onclick=i.dealId?` onclick="openDeal('${esc(i.dealId)}')" style="cursor:pointer"`:'';
+    return`<div class="tl-item ${cls}"${onclick}><div class="tl-time">${i.timeStr||'—'}</div><div class="tl-body"><div class="tl-title">${badge} ${esc(i.title)}</div><div class="tl-meta"><span>${esc(i.meta)}</span></div>${i.meetLink?`<a class="tl-meet" href="${esc(i.meetLink)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">📹 Meet</a>`:''}</div></div>`;
+  }).join('');
+}
+
+// ===== DEALS (Phase 2 preserved) =====
 function applyDealFilters(deals){
   let out=[...(deals||[])];
   if(dealFilter!=='all')out=out.filter(d=>dealFilter==='active'?!d.completed:d.status.includes(dealFilter));
   const q=dealFilters.q.toLowerCase();
-  if(q)out=out.filter(d=>[d.customer,d.status,d.bank,d.source].some(v=>String(v||'').toLowerCase().includes(q)));
+  if(q)out=out.filter(d=>[d.customer,d.status,d.bank,d.rep,d.source].some(v=>String(v||'').toLowerCase().includes(q)));
   if(dealFilters.status)out=out.filter(d=>d.status===dealFilters.status);
   if(dealFilters.rep)out=out.filter(d=>(d.rep||'未設定')===dealFilters.rep);
   if(dealFilters.bank)out=out.filter(d=>(d.bank||'未設定')===dealFilters.bank);
@@ -496,7 +635,6 @@ function applyDealFilters(deals){
   if(dealFilters.amount){const[lo,hi]=dealFilters.amount.split('-').map(Number);out=out.filter(d=>d.amount>=lo&&d.amount<hi)}
   return out.sort((a,b)=>{const k=dealSort.col,av=typeof a[k]==='number'?a[k]:(a[k]||''),bv=typeof b[k]==='number'?b[k]:(b[k]||'');return(av>bv?1:av<bv?-1:0)*dealSort.dir});
 }
-
 function renderDeals(deals){
   filteredDeals=applyDealFilters(deals);
   document.getElementById('deal-count').textContent=`${filteredDeals.length}件表示 / 全${(deals||[]).length}件`;
@@ -504,13 +642,8 @@ function renderDeals(deals){
   document.getElementById('deal-table').innerHTML=`<thead><tr><th onclick="sortDeals('customer')">顧客名</th><th onclick="sortDeals('status')">状況</th><th onclick="sortDeals('bank')">銀行</th><th onclick="sortDeals('amount')" style="text-align:right">融資額</th><th onclick="sortDeals('sales')" style="text-align:right">売上</th><th onclick="sortDeals('source')">元シート</th></tr></thead><tbody>`+filteredDeals.map(d=>`<tr data-id="${esc(d.id)}" onclick="openDeal('${esc(d.id)}',this)"><td style="font-weight:600">${esc(d.customer)}</td><td><span class="status-dot c-${d.completed?'green':d.priority==='action'?'orange':d.priority==='watch'?'blue':'gray'}"></span>${esc(d.status)}</td><td>${esc(d.bank||'-')}</td><td class="amt">${d.amountRaw||'-'}</td><td class="amt">${d.salesRaw||'-'}</td><td style="font-size:11px;color:var(--sub)">${esc(d.source)}</td></tr>`).join('')+'</tbody>';
   renderFilterChips();
 }
-
-function renderFilterChips(){
-  const labels={q:'検索',status:'状況',rep:'担当',bank:'銀行',amount:'金額',priority:'優先度',active:'進行中',needsAction:'対応必要'};
-  document.getElementById('filter-chips').innerHTML=Object.entries(dealFilters).filter(([,v])=>v).map(([k,v])=>`<button class="filter-chip" onclick="clearOneFilter('${k}')">${labels[k]||k}: ${v===true?'ON':esc(v)} ×</button>`).join('');
-}
+function renderFilterChips(){const labels={q:'検索',status:'状況',rep:'担当',bank:'銀行',amount:'金額',priority:'優先度',active:'進行中',needsAction:'対応必要'};document.getElementById('filter-chips').innerHTML=Object.entries(dealFilters).filter(([,v])=>v).map(([k,v])=>`<button class="filter-chip" onclick="clearOneFilter('${k}')">${labels[k]||k}: ${v===true?'ON':esc(v)} ×</button>`).join('')}
 function clearOneFilter(k){dealFilters[k]=typeof dealFilters[k]==='boolean'?false:'';initAdvancedFilters(liveData.deals);renderDeals(liveData.deals)}
-
 function fillSelect(id,values,current){const el=document.getElementById(id);if(!el)return;const first=el.options[0].outerHTML;el.innerHTML=first+[...new Set(values.map(v=>v||'未設定'))].sort().map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('');el.value=current||''}
 function initAdvancedFilters(deals){
   fillSelect('filter-status',(deals||[]).map(d=>d.status),dealFilters.status);
@@ -520,7 +653,6 @@ function initAdvancedFilters(deals){
   ['status','rep','bank','amount','priority'].forEach(k=>{const e=document.getElementById('filter-'+k);if(e)e.value=dealFilters[k]});
   document.querySelectorAll('[data-toggle]').forEach(b=>b.classList.toggle('active',!!dealFilters[b.dataset.toggle]));
 }
-
 function renderDealFilters(deals){
   const el=document.getElementById('deal-filters'),statuses=[...new Set((deals||[]).map(d=>d.status).filter(s=>s&&s!=='-'))];
   el.innerHTML=[{key:'all',label:'すべて'},{key:'active',label:'進行中'},...statuses.slice(0,6).map(s=>({key:s,label:s}))].map(b=>`<button class="deal-filter${dealFilter===b.key?' active':''}" onclick="setDealFilter('${esc(b.key)}',this)">${b.label}</button>`).join('');
@@ -528,13 +660,11 @@ function renderDealFilters(deals){
 function setDealFilter(key,btn){dealFilter=key;document.querySelectorAll('#deal-filters .deal-filter').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');if(liveData)renderDeals(liveData.deals)}
 function filterDealsByStatus(label){dealFilter='all';dealFilters.status=label;if(liveData){renderDealFilters(liveData.deals);initAdvancedFilters(liveData.deals);renderDeals(liveData.deals)}document.getElementById('deals').scrollIntoView({behavior:'smooth'})}
 function sortDeals(col){if(dealSort.col===col)dealSort.dir*=-1;else{dealSort.col=col;dealSort.dir=col==='amount'||col==='sales'?-1:1}if(liveData)renderDeals(liveData.deals)}
-
-// Advanced filter events
 document.querySelectorAll('.filter-control').forEach(el=>el.addEventListener(el.tagName==='INPUT'?'input':'change',()=>{const map={'deal-query':'q','filter-status':'status','filter-rep':'rep','filter-bank':'bank','filter-amount':'amount','filter-priority':'priority'};dealFilters[map[el.id]]=el.value;renderDeals(liveData.deals)}));
 document.querySelectorAll('[data-toggle]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.toggle;dealFilters[k]=!dealFilters[k];b.classList.toggle('active',dealFilters[k]);renderDeals(liveData.deals)}));
 document.getElementById('clear-filters').addEventListener('click',()=>{Object.keys(dealFilters).forEach(k=>dealFilters[k]=typeof dealFilters[k]==='boolean'?false:'');dealFilter='all';if(liveData){initAdvancedFilters(liveData.deals);renderDealFilters(liveData.deals);renderDeals(liveData.deals)}});
 
-// Deal Drawer
+// ===== DEAL DRAWER =====
 function openDeal(id,trigger){
   const d=(liveData?.deals||[]).find(x=>x.id===id);if(!d)return;
   selectedDealId=id;previousFocus=trigger||document.activeElement;
@@ -542,9 +672,7 @@ function openDeal(id,trigger){
   const pl={action:'至急対応',watch:'要確認',info:'確認事項'}[d.priority]||'-';
   const fields=[['状況',d.status],['優先度',pl],['銀行',d.bank||'-'],['融資額',d.amountRaw||'-'],['売上',d.salesRaw||'-'],['物件',d.propertyRaw||'-'],['元シート',d.source||'-']];
   document.getElementById('drawer-content').innerHTML=fields.map(([l,v])=>`<div class="detail-item"><div class="detail-label">${l}</div><div class="detail-value">${esc(v)}</div></div>`).join('');
-  document.getElementById('deal-drawer').classList.add('show');
-  document.getElementById('drawer-overlay').classList.add('show');
-  document.body.classList.add('menu-open');
+  document.getElementById('deal-drawer').classList.add('show');document.getElementById('drawer-overlay').classList.add('show');document.body.classList.add('menu-open');
   document.getElementById('drawer-close').focus();
 }
 function closeDeal(){selectedDealId='';document.getElementById('deal-drawer').classList.remove('show');document.getElementById('drawer-overlay').classList.remove('show');document.body.classList.remove('menu-open');if(previousFocus)previousFocus.focus()}
@@ -554,25 +682,122 @@ document.getElementById('drawer-overlay').addEventListener('click',closeDeal);
 document.getElementById('drawer-prev').addEventListener('click',()=>moveDeal(-1));
 document.getElementById('drawer-next').addEventListener('click',()=>moveDeal(1));
 
-// Rep Stats
+// ===== REP STATS =====
 function renderReps(repData){
   const el=document.getElementById('rep-grid'),reps=(repData&&repData.reps)||[];
   if(!reps.length){el.innerHTML='<div class="section-loading">データなし</div>';return}
   el.innerHTML=reps.map(r=>`<div class="rep-card" onclick="dealFilters.rep='${esc(r.name)}';initAdvancedFilters(liveData.deals);renderDeals(liveData.deals);document.getElementById('deals').scrollIntoView({behavior:'smooth'})"><div class="rep-name">${r.name}</div><div class="rep-stats"><span><span class="rep-stat-val">${r.total}</span>件</span><span>成約<span class="rep-stat-val">${r.rate}</span></span><span>HOT<span class="rep-stat-val">${r.hot}</span></span></div></div>`).join('');
 }
 
-// Data Quality
+// ===== DATA QUALITY =====
 function renderQuality(deals){
-  const items=[
-    {label:'担当者未設定',count:(deals||[]).filter(d=>!d.rep).length},
-    {label:'ステータス未設定',count:(deals||[]).filter(d=>!d.status||d.status==='-').length},
-    {label:'融資額未入力',count:(deals||[]).filter(d=>!d.amount).length},
-    {label:'銀行未設定',count:(deals||[]).filter(d=>!d.bank).length},
-  ];
+  const items=[{label:'担当者未設定',count:(deals||[]).filter(d=>!d.rep).length},{label:'ステータス未設定',count:(deals||[]).filter(d=>!d.status||d.status==='-').length},{label:'融資額未入力',count:(deals||[]).filter(d=>!d.amount).length},{label:'銀行未設定',count:(deals||[]).filter(d=>!d.bank).length}];
   document.getElementById('quality-grid').innerHTML=items.map(x=>`<div class="quality-card"><div class="quality-count">${x.count}</div><div class="quality-label">${x.label}</div></div>`).join('');
 }
 
-// Customer Search
+// ===== NOTIFICATION CENTER =====
+function updateNotifications(){
+  notifications=[];
+  if(liveData&&liveData.deals){
+    liveData.deals.filter(d=>!d.completed&&d.priority==='action').forEach(d=>{notifications.push({id:'deal-action-'+d.id,type:'deal',dot:'c-red',text:`至急: ${d.customer} (${d.status})`,time:''})});
+  }
+  if(calData&&calData.events){
+    const now=nowTokyo();
+    calData.events.filter(ev=>!ev.allDay).forEach(ev=>{
+      const s=new Date(ev.start),diff=Math.round((s-now)/60000);
+      if(diff>0&&diff<=30)notifications.push({id:'cal-soon-'+ev.id,type:'cal',dot:'c-blue',text:`あと${diff}分: ${ev.title}`,time:fmtTime(ev.start)});
+    });
+  }
+  if(slackData&&slackData.messages){
+    slackData.messages.filter(m=>m.isMention).forEach(m=>{notifications.push({id:'slack-mention-'+m.ts,type:'slack',dot:'c-orange',text:`@メンション: ${m.username} in #${m.channelName}`,time:fmtSlackTs(m.ts)})});
+  }
+  const read=JSON.parse(sessionStorage.getItem('notif-read')||'[]');
+  const count=notifications.filter(n=>!read.includes(n.id)).length;
+  document.querySelectorAll('.notif-badge').forEach(b=>b.textContent=count||'');
+}
+function toggleNotif(){
+  const p=document.getElementById('notif-panel');
+  if(p.classList.contains('show')){closeNotif();return}
+  const read=JSON.parse(sessionStorage.getItem('notif-read')||'[]');
+  p.innerHTML=`<div style="display:flex;justify-content:space-between;margin-bottom:12px"><span style="font-weight:700;font-size:15px">通知</span><button onclick="markAllRead()" style="font-size:12px;color:var(--blue)">すべて既読</button></div>`+(notifications.length?notifications.map(n=>`<div class="notif-item ${read.includes(n.id)?'':'unread'}" onclick="onNotifClick('${esc(n.id)}')"><span class="notif-dot ${n.dot}"></span><span class="notif-text">${esc(n.text)}</span><span class="notif-time">${n.time}</span></div>`).join(''):'<div style="text-align:center;color:var(--sub);padding:20px">通知はありません</div>');
+  p.classList.add('show');
+}
+function closeNotif(){document.getElementById('notif-panel').classList.remove('show')}
+function markAllRead(){const ids=notifications.map(n=>n.id);sessionStorage.setItem('notif-read',JSON.stringify(ids));document.querySelectorAll('.notif-badge').forEach(b=>b.textContent='');document.querySelectorAll('.notif-item').forEach(i=>i.classList.remove('unread'))}
+function onNotifClick(id){
+  const read=JSON.parse(sessionStorage.getItem('notif-read')||'[]');
+  if(!read.includes(id)){read.push(id);sessionStorage.setItem('notif-read',JSON.stringify(read))}
+  closeNotif();updateNotifications();
+  const n=notifications.find(x=>x.id===id);
+  if(n&&n.type==='deal'){const dealId=id.replace('deal-action-','');openDeal(dealId)}
+  else if(n&&n.type==='cal')document.getElementById('calendar-section').scrollIntoView({behavior:'smooth'});
+  else if(n&&n.type==='slack')document.getElementById('slack-section').scrollIntoView({behavior:'smooth'});
+}
+document.addEventListener('click',e=>{const p=document.getElementById('notif-panel');if(p.classList.contains('show')&&!p.contains(e.target)&&!e.target.closest('.notif-icon'))closeNotif()});
+
+// ===== VOICE / TEXT COMMAND =====
+let voiceRecognition=null,pendingCmd=null;
+const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+
+function openVoice(){
+  const modal=document.getElementById('voice-modal');modal.classList.add('show');
+  document.getElementById('voice-result').textContent='';
+  document.getElementById('voice-action').textContent='';
+  document.getElementById('voice-buttons').style.display='none';
+  pendingCmd=null;
+  if(SpeechRecognition){
+    document.getElementById('voice-text').textContent='聞いています...';
+    document.getElementById('voice-cmd-input').style.display='none';
+    voiceRecognition=new SpeechRecognition();
+    voiceRecognition.lang='ja-JP';voiceRecognition.continuous=false;voiceRecognition.interimResults=false;
+    voiceRecognition.onresult=e=>{const t=e.results[0][0].transcript;document.getElementById('voice-result').textContent=`「${t}」`;parseVoiceCmd(t)};
+    voiceRecognition.onerror=e=>{document.getElementById('voice-text').textContent='認識できませんでした。テキスト入力してください。';document.getElementById('voice-cmd-input').style.display='';document.getElementById('voice-cmd-input').focus()};
+    voiceRecognition.onend=()=>{document.getElementById('voice-circle').style.animation='none'};
+    voiceRecognition.start();
+  } else {
+    document.getElementById('voice-text').textContent='音声認識非対応 — テキストでコマンド入力';
+    document.getElementById('voice-cmd-input').style.display='';
+    document.getElementById('voice-cmd-input').focus();
+  }
+}
+function closeVoice(){document.getElementById('voice-modal').classList.remove('show');if(voiceRecognition){try{voiceRecognition.stop()}catch{}}document.getElementById('voice-circle').style.animation='pulse 1.5s infinite'}
+function cancelVoice(){document.getElementById('voice-buttons').style.display='none';document.getElementById('voice-action').textContent='キャンセルしました';pendingCmd=null}
+
+document.getElementById('voice-cmd-input').addEventListener('keydown',e=>{if(e.key==='Enter'){const v=e.target.value.trim();if(v){document.getElementById('voice-result').textContent=`「${v}」`;parseVoiceCmd(v);e.target.value=''}}});
+
+function parseVoiceCmd(text){
+  const t=text.toLowerCase();
+  let action='',desc='';
+  if(t.includes('検索')){const name=t.replace(/を?検索/,'').replace(/さん$/,'').trim();action='search';desc=`「${name}」を検索します`;pendingCmd={type:'search',q:name}}
+  else if(t.includes('進行中')){action='filter';desc='進行中の案件だけ表示します';pendingCmd={type:'filter',key:'active'}}
+  else if(t.includes('本審査')){action='filter';desc='本審査の案件を表示します';pendingCmd={type:'statusFilter',status:'本審査'}}
+  else if(t.includes('担当者')&&(t.includes('が')||t.includes('の'))){const name=t.replace(/.*(?:担当者が|担当者の|担当が|担当の)/,'').replace(/の案件.*/,'').trim();action='filter';desc=`担当者「${name}」の案件を表示します`;pendingCmd={type:'repFilter',rep:name}}
+  else if(t.match(/(\d[,\d]*万?円?)以上/)){const m=t.match(/(\d[,\d]*)万?/);const v=parseInt((m?m[1]:'').replace(/,/g,''))||0;action='filter';desc=`${v.toLocaleString()}万円以上の案件を表示します`;pendingCmd={type:'amountFilter',min:v}}
+  else if(t.includes('今日の予定')){action='scroll';desc='今日の予定セクションへ移動します';pendingCmd={type:'scroll',target:'calendar-section'}}
+  else if(t.includes('slack')||t.includes('スラック')){action='scroll';desc='Slack最新情報セクションへ移動します';pendingCmd={type:'scroll',target:'slack-section'}}
+  else if(t.includes('対応が必要')||t.includes('アクション')){action='scroll';desc='対応が必要な案件セクションへ移動します';pendingCmd={type:'scroll',target:'actions'}}
+  else if(t.includes('フィルター')&&(t.includes('解除')||t.includes('クリア'))){action='clear';desc='フィルターをすべて解除します';pendingCmd={type:'clearFilters'}}
+  else if(t.includes('案件一覧')){action='scroll';desc='案件一覧セクションへ移動します';pendingCmd={type:'scroll',target:'deals'}}
+  else{document.getElementById('voice-action').textContent='コマンドを認識できませんでした';document.getElementById('voice-buttons').style.display='none';return}
+  document.getElementById('voice-text').textContent='コマンド認識';
+  document.getElementById('voice-action').textContent=desc;
+  document.getElementById('voice-buttons').style.display='flex';
+}
+function executeVoiceCmd(){
+  if(!pendingCmd)return;
+  const cmd=pendingCmd;pendingCmd=null;closeVoice();
+  switch(cmd.type){
+    case'search':document.getElementById('search-input').value=cmd.q;document.getElementById('search-input').dispatchEvent(new Event('input'));break;
+    case'filter':dealFilters.active=true;if(liveData){initAdvancedFilters(liveData.deals);renderDeals(liveData.deals)}document.getElementById('deals').scrollIntoView({behavior:'smooth'});break;
+    case'statusFilter':dealFilters.status=cmd.status;if(liveData){initAdvancedFilters(liveData.deals);renderDeals(liveData.deals)}document.getElementById('deals').scrollIntoView({behavior:'smooth'});break;
+    case'repFilter':dealFilters.rep=cmd.rep;if(liveData){initAdvancedFilters(liveData.deals);renderDeals(liveData.deals)}document.getElementById('deals').scrollIntoView({behavior:'smooth'});break;
+    case'amountFilter':dealFilters.amount=cmd.min+'-999999';if(liveData){initAdvancedFilters(liveData.deals);renderDeals(liveData.deals)}document.getElementById('deals').scrollIntoView({behavior:'smooth'});break;
+    case'scroll':document.getElementById(cmd.target).scrollIntoView({behavior:'smooth'});break;
+    case'clearFilters':Object.keys(dealFilters).forEach(k=>dealFilters[k]=typeof dealFilters[k]==='boolean'?false:'');dealFilter='all';if(liveData){initAdvancedFilters(liveData.deals);renderDealFilters(liveData.deals);renderDeals(liveData.deals)}break;
+  }
+}
+
+// ===== CUSTOMER SEARCH =====
 let searchTimer;
 document.getElementById('search-input').addEventListener('input',function(){
   renderApps(currentFilter);clearTimeout(searchTimer);
@@ -586,45 +811,57 @@ document.getElementById('search-input').addEventListener('input',function(){
   },400)}
 });
 
-// Load Data
-async function loadLiveData(manual){
+// ===== LOAD DATA =====
+async function loadSheets(){
   if(fetchController)fetchController.abort();
   fetchController=new AbortController();
-  const btn=document.getElementById('refresh-btn');
-  if(btn){btn.disabled=true;btn.textContent='↻ 更新中...'}
   try{
     const res=await fetch(`${API}?type=pipeline`,{signal:fetchController.signal});
     if(!res.ok)throw new Error(`HTTP ${res.status}`);
     const data=await res.json();
     if(data.error)throw new Error(data.error);
     liveData=data;
-    // Add IDs to deals
     (data.deals||[]).forEach((d,i)=>{d.id=d.id||`deal-${i}`});
-    renderKPI(data);
-    renderActions(data.deals);
-    renderPipeFlow(data.summary);
+    renderKPI(data);renderActions(data.deals);renderPipeFlow(data.summary);
     renderMonthly(data.summary?data.summary.monthly:[]);
-    renderDealFilters(data.deals);
-    initAdvancedFilters(data.deals);
-    renderDeals(data.deals);
-    renderReps(data.repStats);
-    renderQuality(data.deals);
+    renderDealFilters(data.deals);initAdvancedFilters(data.deals);renderDeals(data.deals);
+    renderReps(data.repStats);renderQuality(data.deals);
   }catch(e){
     if(e.name==='AbortError')return;
     ['kpi-grid','action-list','pipe-flow','deal-body','rep-grid','quality-grid'].forEach(id=>{
       const el=document.getElementById(id);
       if(el&&el.querySelector('.section-loading'))sectionError(id,e.message);
     });
-  }finally{
-    if(btn){btn.disabled=false;btn.textContent='↻ 今すぐ更新'}
   }
 }
+async function loadCalendar(){
+  try{
+    const res=await fetch(CAL_API);
+    calData=await res.json();
+  }catch(e){calData={error:e.message}}
+  renderCalendar(calData);
+}
+async function loadSlack(){
+  try{
+    const res=await fetch(SLACK_API);
+    slackData=await res.json();
+  }catch(e){slackData={error:e.message}}
+  renderSlack(slackData);
+}
 
-loadLiveData();
-refreshTimer=setInterval(loadLiveData,5*60*1000);
+async function refreshAll(manual){
+  const btn=document.getElementById('refresh-btn');
+  if(btn){btn.disabled=true;btn.textContent='↻ 更新中...'}
+  await Promise.allSettled([loadSheets(),loadCalendar(),loadSlack()]);
+  renderTimeline();updateNotifications();
+  if(btn){btn.disabled=false;btn.textContent='↻ 今すぐ更新'}
+}
+
+refreshAll();
+refreshTimer=setInterval(()=>refreshAll(),5*60*1000);
 document.addEventListener('visibilitychange',()=>{
   if(document.hidden){clearInterval(refreshTimer);refreshTimer=null}
-  else if(!refreshTimer){loadLiveData();refreshTimer=setInterval(loadLiveData,5*60*1000)}
+  else if(!refreshTimer){refreshAll();refreshTimer=setInterval(()=>refreshAll(),5*60*1000)}
 });
 </script>
 </body>
