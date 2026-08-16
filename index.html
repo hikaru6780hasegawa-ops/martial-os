@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Martial OS — 株式会社 Martial Arts</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F5F3EF;--card:#FFFFFF;--text:#1A1A2E;--sub:#6B7280;
+  --red:#C41E3A;--navy:#1A1A2E;--accent:#E8D5B7;
+  --border:#E5E2DC;--hover:#FAF8F5;--shadow:0 1px 3px rgba(0,0,0,.06);
+  --radius:12px;--sidebar-w:260px;
+  --blue:#3B82F6;--green:#10B981;--orange:#F59E0B;--yellow:#EAB308;
+}
+body{font-family:-apple-system,'Hiragino Sans','Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font:inherit;border:none;background:none}
+
+/* Layout */
+.layout{display:flex;min-height:100vh}
+.sidebar{width:var(--sidebar-w);background:var(--card);border-right:1px solid var(--border);padding:24px 16px;display:flex;flex-direction:column;position:fixed;height:100vh;overflow-y:auto;z-index:10}
+.main{margin-left:var(--sidebar-w);flex:1;padding:32px 40px;max-width:1200px}
+
+/* Sidebar */
+.logo-area{display:flex;align-items:center;gap:12px;margin-bottom:32px;padding:0 4px}
+.logo-mark{width:40px;height:40px;background:var(--red);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px}
+.logo-text{font-size:15px;font-weight:700;color:var(--navy);line-height:1.2}
+.logo-text small{display:block;font-size:11px;font-weight:400;color:var(--sub)}
+.nav-section{margin-bottom:24px}
+.nav-label{font-size:11px;font-weight:600;color:var(--sub);text-transform:uppercase;letter-spacing:.5px;padding:0 12px;margin-bottom:8px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;font-size:14px;color:var(--text);transition:background .15s}
+.nav-item:hover{background:var(--hover)}
+.nav-item.active{background:var(--bg);font-weight:600}
+.nav-item .icon{width:20px;text-align:center;font-size:16px}
+.nav-badge{margin-left:auto;background:var(--red);color:#fff;font-size:11px;font-weight:600;padding:2px 7px;border-radius:10px}
+.sidebar-footer{margin-top:auto;padding:16px 12px;border-top:1px solid var(--border);font-size:12px;color:var(--sub);line-height:1.5}
+.sidebar-footer .motto{font-style:italic;color:var(--navy);font-weight:500}
+
+/* Header */
+.greeting{margin-bottom:24px}
+.greeting-date{font-size:13px;color:var(--sub);margin-bottom:4px}
+.greeting-text{font-size:26px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.greeting-sub{font-size:14px;color:var(--sub)}
+.target-banner{background:var(--card);border-left:4px solid var(--red);border-radius:var(--radius);padding:16px 20px;margin-bottom:24px;box-shadow:var(--shadow)}
+.target-label{font-size:11px;font-weight:700;color:var(--red);letter-spacing:1px;margin-bottom:4px}
+.target-text{font-size:15px;color:var(--text)}
+.target-text strong{font-size:24px;color:var(--red);font-weight:800}
+
+/* Search */
+.search-area{margin-bottom:28px}
+.search-box{display:flex;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:4px 4px 4px 16px;box-shadow:var(--shadow);transition:border-color .2s}
+.search-box:focus-within{border-color:var(--navy)}
+.search-box input{flex:1;border:none;outline:none;font-size:15px;padding:10px 0;background:transparent;color:var(--text)}
+.search-box input::placeholder{color:#B0ADA6}
+.search-btn{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;transition:background .15s}
+.search-btn.voice{background:var(--red);color:#fff}
+.search-btn.voice:hover{background:#A31830}
+
+/* Section */
+.section{margin-bottom:32px}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.section-title{font-size:13px;font-weight:700;color:var(--red);letter-spacing:1px;text-transform:uppercase}
+.section-title-main{font-size:20px;font-weight:700;color:var(--navy)}
+.section-more{font-size:13px;color:var(--sub);display:flex;align-items:center;gap:4px}
+.section-status{font-size:11px;color:var(--sub);margin-top:4px}
+.section-error{background:#FEF2F2;border:1px solid #FECACA;border-radius:var(--radius);padding:16px;color:#991B1B;font-size:13px;display:flex;align-items:center;justify-content:space-between}
+.section-error button{background:var(--red);color:#fff;padding:6px 14px;border-radius:6px;font-size:12px}
+.section-loading{text-align:center;padding:24px;color:var(--sub);font-size:13px}
+
+/* KPI Grid */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:16px}
+.kpi-card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);text-align:center}
+.kpi-value{font-size:28px;font-weight:800;color:var(--navy);line-height:1.2}
+.kpi-value.red{color:var(--red)}
+.kpi-label{font-size:12px;color:var(--sub);margin-top:4px}
+.kpi-sub{font-size:11px;color:var(--sub);margin-top:2px}
+.kpi-card.highlight{border-left:4px solid var(--red)}
+.kpi-card.period{background:var(--navy);color:#fff}
+.kpi-card.period .kpi-value{color:#fff}
+.kpi-card.period .kpi-label,.kpi-card.period .kpi-sub{color:rgba(255,255,255,.7)}
+
+/* Action cards */
+.action-list{display:flex;flex-direction:column;gap:10px}
+.action-card{display:flex;align-items:stretch;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.action-priority{width:5px;flex-shrink:0}
+.action-priority.urgent{background:#EF4444}
+.action-priority.action{background:var(--orange)}
+.action-priority.watch{background:var(--blue)}
+.action-body{flex:1;padding:14px 18px;display:flex;align-items:center;gap:16px;min-width:0}
+.action-main{flex:1;min-width:0}
+.action-customer{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.action-meta{font-size:12px;color:var(--sub);margin-top:2px;display:flex;gap:12px;flex-wrap:wrap}
+.action-amount{font-size:14px;font-weight:700;color:var(--navy);white-space:nowrap}
+.action-badge{font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px;white-space:nowrap}
+.action-badge.urgent{background:#FEE2E2;color:#991B1B}
+.action-badge.action{background:#FEF3C7;color:#92400E}
+.action-badge.watch{background:#DBEAFE;color:#1E40AF}
+
+/* Pipeline flow */
+.pipe-flow{display:flex;gap:2px;margin-bottom:16px;overflow-x:auto}
+.pipe-step{flex:1;min-width:100px;background:var(--card);padding:12px 8px;text-align:center;cursor:pointer;transition:background .15s;border:2px solid transparent;position:relative}
+.pipe-step:first-child{border-radius:var(--radius) 0 0 var(--radius)}
+.pipe-step:last-child{border-radius:0 var(--radius) var(--radius) 0}
+.pipe-step:hover{background:var(--hover)}
+.pipe-step.active{border-color:var(--navy);background:var(--hover)}
+.pipe-step-count{font-size:22px;font-weight:800;color:var(--navy)}
+.pipe-step-label{font-size:11px;color:var(--sub);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pipe-step-amount{font-size:11px;color:var(--navy);font-weight:600;margin-top:2px}
+.pipe-step-bar{height:4px;border-radius:2px;margin-top:6px}
+
+/* Status colors */
+.status-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;flex-shrink:0}
+.c-blue{background:var(--blue)}.c-green{background:var(--green)}
+.c-orange{background:var(--orange)}.c-yellow{background:var(--yellow)}
+.c-red{background:#EF4444}.c-gray{background:#9CA3AF}
+
+/* Deal list */
+.deal-filters{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.deal-filter{padding:6px 12px;border-radius:6px;font-size:12px;color:var(--sub);background:var(--card);border:1px solid var(--border);transition:all .15s}
+.deal-filter:hover,.deal-filter.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.deal-count{font-size:12px;color:var(--sub);margin-bottom:8px}
+.deal-table{width:100%;border-collapse:separate;border-spacing:0}
+.deal-table th{font-size:11px;color:var(--sub);font-weight:600;text-align:left;padding:8px 12px;border-bottom:2px solid var(--border);white-space:nowrap;cursor:pointer;user-select:none}
+.deal-table th:hover{color:var(--navy)}
+.deal-table td{font-size:13px;padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
+.deal-table tr:hover td{background:var(--hover)}
+.deal-table .amt{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* Monthly cards */
+.monthly-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.monthly-card{background:var(--card);border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow);cursor:pointer;transition:transform .15s}
+.monthly-card:hover{transform:translateY(-1px)}
+.monthly-card.active{border:2px solid var(--navy)}
+.month-label{font-size:15px;font-weight:600;margin-bottom:4px}
+.month-meta{font-size:13px;color:var(--sub)}
+
+/* Rep stats */
+.rep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.rep-card{background:var(--card);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow)}
+.rep-name{font-size:14px;font-weight:600;margin-bottom:6px}
+.rep-stats{display:flex;gap:12px;font-size:12px;color:var(--sub)}
+.rep-stat-val{font-weight:700;color:var(--navy)}
+
+/* Schedule */
+.schedule-list{display:flex;flex-direction:column;gap:10px}
+.schedule-placeholder{text-align:center;padding:20px;color:var(--sub);font-size:13px;background:var(--card);border-radius:var(--radius);border:1px dashed var(--border)}
+
+/* Apps */
+.filter-bar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.filter-btn{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:500;color:var(--sub);background:var(--card);border:1px solid var(--border);transition:all .15s}
+.filter-btn:hover,.filter-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.apps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.app-card{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;transition:transform .15s,box-shadow .15s;cursor:pointer}
+.app-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.1)}
+.app-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.app-icon.sales{background:#FEE2E2;color:var(--red)}
+.app-icon.ops{background:#DBEAFE;color:#1E40AF}
+.app-icon.contract{background:#D1FAE5;color:#065F46}
+.app-icon.accounting{background:#FEF3C7;color:#92400E}
+.app-icon.mgmt{background:#EDE9FE;color:#5B21B6}
+.app-icon.docs{background:#E0E7FF;color:#3730A3}
+.app-icon.system{background:#F3F4F6;color:#374151}
+.app-name{font-size:14px;font-weight:600;color:var(--text)}
+.app-desc{font-size:12px;color:var(--sub);line-height:1.4}
+
+/* Pillars */
+.pillars{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.pillar{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--navy);font-weight:500}
+.pillar-dot{width:8px;height:8px;border-radius:50%;background:var(--red)}
+
+/* Voice modal */
+.voice-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:center;justify-content:center}
+.voice-modal.show{display:flex}
+.voice-inner{background:var(--card);border-radius:20px;padding:48px;text-align:center;max-width:360px;width:90%}
+.voice-circle{width:80px;height:80px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:32px;color:#fff;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.08);opacity:.8}}
+.voice-text{font-size:16px;color:var(--text);margin-bottom:20px}
+.voice-close{padding:10px 24px;background:var(--bg);border-radius:8px;font-size:14px;color:var(--sub)}
+
+/* User menu */
+.user-area{display:flex;align-items:center;gap:12px;padding:16px 12px;margin-top:12px;border-radius:8px;cursor:pointer}
+.user-area:hover{background:var(--hover)}
+.user-avatar{width:36px;height:36px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+.user-name{font-size:14px;font-weight:600}
+.user-role{font-size:11px;color:var(--sub)}
+
+/* Mobile overlay */
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:40}
+.sidebar-overlay.show{display:block}
+body.menu-open{overflow:hidden}
+
+/* Mobile */
+@media(max-width:768px){
+  .sidebar{display:none;position:fixed;left:0;top:0;width:280px;height:100vh;z-index:50;overflow-y:auto}
+  .sidebar.open{display:flex}
+  .main{margin-left:0;padding:20px 16px}
+  .mobile-header{display:flex !important;align-items:center;justify-content:space-between;margin-bottom:20px;padding:0 4px}
+  .greeting-text{font-size:20px}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .pipe-flow{gap:1px}
+  .pipe-step{min-width:70px;padding:10px 4px}
+  .pipe-step-count{font-size:16px}
+  .pipe-step-label{font-size:10px}
+  .monthly-grid{grid-template-columns:1fr}
+  .apps-grid{grid-template-columns:repeat(2,1fr)}
+  .filter-bar,.deal-filters{overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}
+  .deal-table{font-size:12px}
+  .rep-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(min-width:769px){
+  .mobile-header{display:none !important}
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="logo-area">
+      <div class="logo-mark">M</div>
+      <div class="logo-text">Martial OS<small>株式会社 Martial Arts</small></div>
+    </div>
+    <nav>
+      <div class="nav-section">
+        <div class="nav-label">メイン</div>
+        <a class="nav-item active" href="#"><span class="icon">🏠</span>ダッシュボード</a>
+        <a class="nav-item" href="#actions"><span class="icon">🔥</span>今日のアクション<span class="nav-badge" id="action-badge">-</span></a>
+        <a class="nav-item" href="#schedule"><span class="icon">📅</span>今日の予定</a>
+        <a class="nav-item" href="#pipeline"><span class="icon">📊</span>パイプライン<span class="nav-badge" id="pipe-badge">-</span></a>
+        <a class="nav-item" href="#deals"><span class="icon">📋</span>案件一覧</a>
+        <a class="nav-item" href="#apps"><span class="icon">🔧</span>アプリ一覧</a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-label">営業</div>
+        <a class="nav-item" href="https://ma-customer-master.netlify.app/" target="_blank"><span class="icon">👥</span>顧客管理</a>
+        <a class="nav-item" href="https://docs.google.com/spreadsheets/d/1Uj_UtIs7ofFSuOcCN5iRsWt8yqhlsGRs7BTy8oUaamA" target="_blank"><span class="icon">📈</span>売上表</a>
+      </div>
+    </nav>
+    <div class="user-area">
+      <div class="user-avatar">長</div>
+      <div><div class="user-name">長谷川 光</div><div class="user-role">代表取締役 CEO</div></div>
+    </div>
+    <div class="sidebar-footer">
+      <div class="motto">「今ここにない未来は自分で創る」</div>
+      <div style="margin-top:4px">運命を共に創造する</div>
+    </div>
+  </aside>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <main class="main">
+    <div class="mobile-header">
+      <button id="menu-toggle" aria-expanded="false" aria-controls="sidebar" style="font-size:24px">☰</button>
+      <div class="logo-area" style="margin:0">
+        <div class="logo-mark" style="width:32px;height:32px;font-size:14px">M</div>
+        <div class="logo-text" style="font-size:13px">Martial OS</div>
+      </div>
+      <div style="width:24px"></div>
+    </div>
+
+    <div class="greeting">
+      <div class="greeting-date" id="today-date"></div>
+      <div class="greeting-text" id="greeting-text"></div>
+      <div class="greeting-sub">今日やることと、会社のすべての入口をここに。</div>
+    </div>
+
+    <div class="target-banner">
+      <div class="target-label">TARGET 2030</div>
+      <div class="target-text">全社員の最低年収 <strong>1,000万円</strong>を実現</div>
+    </div>
+
+    <div class="search-area">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="顧客名・アプリ名・やりたいことから探す" autocomplete="off">
+        <button class="search-btn voice" onclick="openVoice()" aria-label="音声検索">🎙</button>
+      </div>
+    </div>
+
+    <!-- KPI -->
+    <div class="section" id="kpi">
+      <div class="section-header">
+        <div><div class="section-title">KPI</div><div class="section-title-main">営業サマリー</div></div>
+        <div class="section-status" id="kpi-status"></div>
+      </div>
+      <div class="kpi-grid" id="kpi-grid"><div class="section-loading">読み込み中...</div></div>
+    </div>
+
+    <!-- Today's Actions -->
+    <div class="section" id="actions">
+      <div class="section-header">
+        <div><div class="section-title">TODAY'S ACTIONS</div><div class="section-title-main">対応が必要な案件</div></div>
+      </div>
+      <div class="action-list" id="action-list"><div class="section-loading">読み込み中...</div></div>
+    </div>
+
+    <!-- Schedule -->
+    <div class="section" id="schedule">
+      <div class="section-header">
+        <div><div class="section-title">TODAY</div><div class="section-title-main">今日の予定</div></div>
+      </div>
+      <div class="schedule-placeholder">Googleカレンダー未設定 — 次フェーズで連携予定</div>
+    </div>
+
+    <!-- Pipeline -->
+    <div class="section" id="pipeline">
+      <div class="section-header">
+        <div><div class="section-title">PIPELINE</div><div class="section-title-main">決済見込パイプライン</div></div>
+        <a class="section-more" href="https://docs.google.com/spreadsheets/d/1Uj_UtIs7ofFSuOcCN5iRsWt8yqhlsGRs7BTy8oUaamA" target="_blank" rel="noopener">売上表を開く →</a>
+      </div>
+      <div id="pipe-flow" class="pipe-flow"><div class="section-loading" style="width:100%">読み込み中...</div></div>
+      <div class="monthly-grid" id="monthly-grid" style="margin-top:16px"></div>
+    </div>
+
+    <!-- Deals -->
+    <div class="section" id="deals">
+      <div class="section-header">
+        <div><div class="section-title">DEALS</div><div class="section-title-main">案件一覧</div></div>
+      </div>
+      <div class="deal-filters" id="deal-filters"></div>
+      <div class="deal-count" id="deal-count"></div>
+      <div style="overflow-x:auto">
+        <table class="deal-table" id="deal-table"><tbody id="deal-body"><tr><td colspan="6" class="section-loading">読み込み中...</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- Rep Stats -->
+    <div class="section" id="reps">
+      <div class="section-header">
+        <div><div class="section-title">TEAM</div><div class="section-title-main">担当者別</div></div>
+      </div>
+      <div class="rep-grid" id="rep-grid"><div class="section-loading">読み込み中...</div></div>
+    </div>
+
+    <!-- Apps -->
+    <div class="section" id="apps">
+      <div class="section-header">
+        <div><div class="section-title">TOOLS</div><div class="section-title-main">何をしますか？</div></div>
+      </div>
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterApps('all',this)">すべて</button>
+        <button class="filter-btn" onclick="filterApps('sales',this)">営業</button>
+        <button class="filter-btn" onclick="filterApps('ops',this)">業務</button>
+        <button class="filter-btn" onclick="filterApps('contract',this)">契約</button>
+        <button class="filter-btn" onclick="filterApps('accounting',this)">経理</button>
+        <button class="filter-btn" onclick="filterApps('mgmt',this)">経営</button>
+        <button class="filter-btn" onclick="filterApps('docs',this)">資料</button>
+        <button class="filter-btn" onclick="filterApps('system',this)">システム</button>
+      </div>
+      <div class="apps-grid" id="apps-grid"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title" style="margin-bottom:12px">5 PILLARS</div>
+      <div class="pillars">
+        <div class="pillar"><span class="pillar-dot"></span>創造力</div>
+        <div class="pillar"><span class="pillar-dot"></span>協働</div>
+        <div class="pillar"><span class="pillar-dot"></span>顧客志向</div>
+        <div class="pillar"><span class="pillar-dot"></span>信念</div>
+        <div class="pillar"><span class="pillar-dot"></span>探求心</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="voice-modal" id="voice-modal" onclick="closeVoice(event)">
+  <div class="voice-inner" onclick="event.stopPropagation()">
+    <div class="voice-circle">🎙</div>
+    <div class="voice-text">聞いています...</div>
+    <button class="voice-close" onclick="closeVoice()">閉じる</button>
+  </div>
+</div>
+
+<script>
+// --- Apps ---
+const APPS = [
+  {name:'顧客管理',desc:'顧客情報・ランク・担当を一覧管理',icon:'👥',cat:'sales',url:'https://ma-customer-master.netlify.app/'},
+  {name:'アポ報告',desc:'アポイント報告・スコアリング',icon:'📞',cat:'sales',url:'#'},
+  {name:'商談報告',desc:'商談内容を報告・共有',icon:'🤝',cat:'sales',url:'#'},
+  {name:'案件相談',desc:'案件の相談シートを作成',icon:'📋',cat:'sales',url:'#'},
+  {name:'議事録・次アクション',desc:'顧客ごとの議事録と次回アクション',icon:'📝',cat:'ops',url:'#'},
+  {name:'アルリット格納依頼',desc:'アルリットへの書類格納を依頼',icon:'📁',cat:'ops',url:'#'},
+  {name:'BC間書類AI生成',desc:'AIで売買契約書類を自動生成',icon:'🤖',cat:'contract',url:'#'},
+  {name:'請求書管理',desc:'請求書の発行・振込管理',icon:'💳',cat:'accounting',url:'#'},
+  {name:'振込依頼',desc:'振込依頼フォーム・承認',icon:'💰',cat:'accounting',url:'https://docs.google.com/forms/d/e/1FAIpQLSeOuykPEpEGRebWuTJfFkb5kTfSdLZnARYZhh_X9340Mp_j2Q/viewform'},
+  {name:'資金調達スケジュール',desc:'融資・資金繰り計画を管理',icon:'📊',cat:'mgmt',url:'#'},
+  {name:'会社資料・行動指針',desc:'理念・行動指針・社内ルール',icon:'📖',cat:'docs',url:'http://aluaport2.xsrv.jp/ma/philosophy/'},
+  {name:'新入社員営業ガイド',desc:'営業の基本と手順書',icon:'🎓',cat:'docs',url:'#'},
+  {name:'DXポータル管理',desc:'社内システム・ツール一覧',icon:'⚙️',cat:'system',url:'#'},
+  {name:'売上表',desc:'案件一覧・売上実績',icon:'📈',cat:'mgmt',url:'https://docs.google.com/spreadsheets/d/1Uj_UtIs7ofFSuOcCN5iRsWt8yqhlsGRs7BTy8oUaamA'},
+  {name:'外出報告',desc:'外出報告フォーム',icon:'🚗',cat:'ops',url:'https://docs.google.com/forms/d/e/1FAIpQLSdq7TYoHOYb-6tK7BVffhQETUs8KbqYianOJAZFEG0o64rFGQ/viewform'},
+  {name:'案件報告',desc:'案件報告フォーム',icon:'📄',cat:'sales',url:'https://docs.google.com/forms/d/e/1FAIpQLScnifZiAYuPh2XDo4K5_YEWMldA6lc4H9t66qZPQ5sm6Iemyg/viewform'},
+];
+
+let currentFilter = 'all';
+function renderApps(filter){
+  const grid = document.getElementById('apps-grid');
+  const q = document.getElementById('search-input').value.toLowerCase();
+  const filtered = APPS.filter(a => {
+    if(filter !== 'all' && a.cat !== filter) return false;
+    if(q && !a.name.toLowerCase().includes(q) && !a.desc.toLowerCase().includes(q)) return false;
+    return true;
+  });
+  grid.innerHTML = filtered.map(a => `
+    <a class="app-card" href="${a.url}" target="_blank" rel="noopener" data-cat="${a.cat}">
+      <div class="app-icon ${a.cat}">${a.icon}</div>
+      <div class="app-name">${a.name}</div>
+      <div class="app-desc">${a.desc}</div>
+    </a>
+  `).join('');
+}
+function filterApps(cat, btn){
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  renderApps(cat);
+}
+
+// --- Voice ---
+function openVoice(){document.getElementById('voice-modal').classList.add('show')}
+function closeVoice(e){
+  if(!e || e.target === document.getElementById('voice-modal'))
+    document.getElementById('voice-modal').classList.remove('show');
+}
+
+// --- Mobile Menu ---
+const sidebarEl = document.getElementById('sidebar');
+const overlayEl = document.getElementById('sidebar-overlay');
+const menuBtn = document.getElementById('menu-toggle');
+function openMenu(){sidebarEl.classList.add('open');overlayEl.classList.add('show');document.body.classList.add('menu-open');menuBtn.setAttribute('aria-expanded','true')}
+function closeMenu(){sidebarEl.classList.remove('open');overlayEl.classList.remove('show');document.body.classList.remove('menu-open');menuBtn.setAttribute('aria-expanded','false')}
+menuBtn.addEventListener('click', () => sidebarEl.classList.contains('open') ? closeMenu() : openMenu());
+overlayEl.addEventListener('click', closeMenu);
+sidebarEl.querySelectorAll('.nav-item').forEach(l => l.addEventListener('click', closeMenu));
+window.matchMedia('(min-width:769px)').addEventListener('change', e => { if(e.matches) closeMenu() });
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape'){closeVoice();closeMenu()}
+  if(e.key === '/' && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();document.getElementById('search-input').focus()}
+});
+
+// --- Greeting ---
+function updateGreeting(){
+  const now = new Date();
+  const days = ['日','月','火','水','木','金','土'];
+  document.getElementById('today-date').textContent = now.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric'}) + `（${days[now.getDay()]}）`;
+  const h = now.getHours();
+  document.getElementById('greeting-text').textContent = (h < 12 ? 'おはようございます' : h < 18 ? 'お疲れさまです' : 'お疲れさまでした') + '、長谷川さん。';
+}
+updateGreeting();
+renderApps('all');
+
+// ===== LIVE DATA =====
+const API = '/api/data';
+let liveData = null;
+let fetchController = null;
+let refreshTimer = null;
+
+function fmtMan(v) {
+  if (!v && v !== 0) return '-';
+  const n = typeof v === 'number' ? v : parseInt(String(v).replace(/[,万円\s]/g,'')) || 0;
+  if (n >= 10000) return (n/10000).toFixed(1).replace(/\.0$/,'') + '億円';
+  return n.toLocaleString() + '万円';
+}
+
+function sectionError(id, msg) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = `<div class="section-error"><span>取得エラー: ${msg}</span><button onclick="loadLiveData()">再試行</button></div>`;
+}
+
+// --- KPI ---
+function renderKPI(data) {
+  const el = document.getElementById('kpi-grid');
+  const d = data.dashboard || {};
+  const k = d.kpi || {};
+  const p = data.period || {};
+  const s = data.summary || {};
+  const t = s.total || {};
+
+  const cards = [];
+  if (p.periods && p.periods[0]) {
+    const cur = p.periods[0];
+    cards.push({v: cur.salesOku, l: `${cur.name}`, sub: `${cur.months}経過`, cls:'period'});
+    if (p.forecast && p.forecast.prediction) cards.push({v: p.forecast.prediction.replace(/万円.*/, '万'), l: '着地予測', sub: p.forecast.yoy || '', cls:'period'});
+  }
+  if (t.count) cards.push({v: t.count, l: 'パイプライン', sub: fmtMan(parseInt(String(t.amount).replace(/[,万]/g,''))||0), cls:'highlight'});
+  if (k.totalCustomers) cards.push({v: k.totalCustomers.toLocaleString(), l: '総顧客数'});
+  if (k.sold) cards.push({v: k.sold.toLocaleString(), l: '販売済', sub: `成約率 ${k.conversionRate}`});
+  if (k.unsold) cards.push({v: k.unsold.toLocaleString(), l: '未販売'});
+  if (k.sPriority) cards.push({v: k.sPriority, l: 'S優先', cls:'highlight'});
+  if (k.aPriority) cards.push({v: k.aPriority, l: 'A優先'});
+
+  el.innerHTML = cards.map(c => `
+    <div class="kpi-card ${c.cls||''}">
+      <div class="kpi-value">${c.v}</div>
+      <div class="kpi-label">${c.l}</div>
+      ${c.sub ? `<div class="kpi-sub">${c.sub}</div>` : ''}
+    </div>
+  `).join('');
+
+  const statusEl = document.getElementById('kpi-status');
+  if (d.lastUpdate) statusEl.textContent = `最終更新: ${d.lastUpdate}`;
+}
+
+// --- Actions ---
+function renderActions(deals) {
+  const el = document.getElementById('action-list');
+  const active = (deals || []).filter(d => !d.completed);
+  const badge = document.getElementById('action-badge');
+  badge.textContent = active.length || '0';
+
+  if (!active.length) {
+    el.innerHTML = '<div class="schedule-placeholder">対応が必要な案件はありません</div>';
+    return;
+  }
+  const sorted = active.sort((a,b) => {
+    const order = {action:0, watch:1, info:2};
+    return (order[a.priority]||2) - (order[b.priority]||2) || b.amount - a.amount;
+  });
+  el.innerHTML = sorted.map(d => {
+    const pLabel = d.priority === 'action' ? '要対応' : d.priority === 'watch' ? '確認' : '情報';
+    return `<div class="action-card">
+      <div class="action-priority ${d.priority}"></div>
+      <div class="action-body">
+        <div class="action-main">
+          <div class="action-customer">${d.customer}</div>
+          <div class="action-meta">
+            <span>${d.status}</span>
+            <span>${d.bank}</span>
+            <span>${d.source}</span>
+          </div>
+        </div>
+        <div class="action-amount">${fmtMan(d.amount)}</div>
+        <span class="action-badge ${d.priority}">${pLabel}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// --- Pipeline Flow ---
+function renderPipeFlow(summary) {
+  const el = document.getElementById('pipe-flow');
+  const items = (summary && summary.byStatus) || [];
+  const badge = document.getElementById('pipe-badge');
+  const total = summary && summary.total;
+  if (total) badge.textContent = total.count.replace(/[^0-9]/g,'');
+
+  if (!items.length) { el.innerHTML = '<div class="section-loading">データなし</div>'; return; }
+
+  const colors = {blue:'var(--blue)',green:'var(--green)',orange:'var(--orange)',yellow:'var(--yellow)',red:'#EF4444',gray:'#9CA3AF'};
+  el.innerHTML = items.map((s,i) => `
+    <div class="pipe-step" onclick="filterDealsByStatus('${s.label}')" tabindex="0" role="button" aria-label="${s.label} ${s.count}">
+      <div class="pipe-step-count">${s.count.replace(/[^0-9]/g,'')}</div>
+      <div class="pipe-step-label">${s.label}</div>
+      <div class="pipe-step-amount">${s.amount}</div>
+      <div class="pipe-step-bar" style="background:${colors[s.color]||'#9CA3AF'}"></div>
+    </div>
+  `).join('');
+}
+
+// --- Monthly ---
+function renderMonthly(items) {
+  const el = document.getElementById('monthly-grid');
+  if (!items || !items.length) { el.innerHTML = ''; return; }
+  el.innerHTML = items.map(m => `
+    <div class="monthly-card">
+      <div class="month-label">${m.label}</div>
+      <div class="month-meta">${m.count} | ${m.amount}</div>
+      <div style="font-size:12px;color:var(--sub);margin-top:4px">${m.note || ''}</div>
+    </div>
+  `).join('');
+}
+
+// --- Deals Table ---
+let dealFilter = 'all';
+let dealSort = {col:'amount', dir:-1};
+
+function renderDeals(deals) {
+  const body = document.getElementById('deal-body');
+  const countEl = document.getElementById('deal-count');
+
+  let filtered = deals || [];
+  if (dealFilter !== 'all') {
+    if (dealFilter === 'active') filtered = filtered.filter(d => !d.completed);
+    else filtered = filtered.filter(d => d.status.includes(dealFilter));
+  }
+
+  filtered.sort((a,b) => {
+    const key = dealSort.col;
+    const av = typeof a[key] === 'number' ? a[key] : (a[key]||'');
+    const bv = typeof b[key] === 'number' ? b[key] : (b[key]||'');
+    return (av > bv ? 1 : av < bv ? -1 : 0) * dealSort.dir;
+  });
+
+  countEl.textContent = `${filtered.length}件表示 / 全${(deals||[]).length}件`;
+
+  if (!filtered.length) {
+    body.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--sub)">該当なし</td></tr>';
+    return;
+  }
+
+  const header = `<thead><tr>
+    <th onclick="sortDeals('customer')">顧客名</th>
+    <th onclick="sortDeals('status')">状況</th>
+    <th onclick="sortDeals('bank')">銀行</th>
+    <th onclick="sortDeals('amount')" style="text-align:right">融資額</th>
+    <th onclick="sortDeals('sales')" style="text-align:right">売上</th>
+    <th onclick="sortDeals('source')">元シート</th>
+  </tr></thead>`;
+
+  const rows = filtered.map(d => `<tr>
+    <td style="font-weight:600">${d.customer}</td>
+    <td><span class="status-dot c-${d.completed ? 'green' : d.priority === 'action' ? 'orange' : d.priority === 'watch' ? 'blue' : 'gray'}"></span>${d.status}</td>
+    <td>${d.bank}</td>
+    <td class="amt">${d.amountRaw || '-'}</td>
+    <td class="amt">${d.salesRaw || '-'}</td>
+    <td style="font-size:11px;color:var(--sub)">${d.source}</td>
+  </tr>`).join('');
+
+  const table = document.getElementById('deal-table');
+  table.innerHTML = header + '<tbody>' + rows + '</tbody>';
+}
+
+function renderDealFilters(deals) {
+  const el = document.getElementById('deal-filters');
+  const statuses = [...new Set((deals||[]).map(d => d.status).filter(s => s && s !== '-'))];
+  const buttons = [
+    {key:'all', label:'すべて'},
+    {key:'active', label:'進行中'},
+    ...statuses.slice(0,6).map(s => ({key:s, label:s}))
+  ];
+  el.innerHTML = buttons.map(b => `<button class="deal-filter${dealFilter===b.key?' active':''}" onclick="setDealFilter('${b.key}',this)">${b.label}</button>`).join('');
+}
+
+function setDealFilter(key, btn) {
+  dealFilter = key;
+  document.querySelectorAll('.deal-filter').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  if (liveData) renderDeals(liveData.deals);
+}
+
+function filterDealsByStatus(label) {
+  dealFilter = label;
+  if (liveData) {
+    renderDealFilters(liveData.deals);
+    renderDeals(liveData.deals);
+  }
+  document.getElementById('deals').scrollIntoView({behavior:'smooth'});
+}
+
+function sortDeals(col) {
+  if (dealSort.col === col) dealSort.dir *= -1;
+  else { dealSort.col = col; dealSort.dir = col === 'amount' || col === 'sales' ? -1 : 1; }
+  if (liveData) renderDeals(liveData.deals);
+}
+
+// --- Rep Stats ---
+function renderReps(repData) {
+  const el = document.getElementById('rep-grid');
+  const reps = (repData && repData.reps) || [];
+  if (!reps.length) { el.innerHTML = '<div class="section-loading">データなし</div>'; return; }
+  el.innerHTML = reps.map(r => `
+    <div class="rep-card">
+      <div class="rep-name">${r.name}</div>
+      <div class="rep-stats">
+        <span><span class="rep-stat-val">${r.total}</span>件</span>
+        <span>成約<span class="rep-stat-val">${r.rate}</span></span>
+        <span>HOT<span class="rep-stat-val">${r.hot}</span></span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// --- Customer Search ---
+let searchTimer;
+document.getElementById('search-input').addEventListener('input', function() {
+  renderApps(currentFilter);
+  clearTimeout(searchTimer);
+  const q = this.value.trim();
+  if (q.length >= 2) {
+    searchTimer = setTimeout(() => {
+      fetch(`${API}?type=customers&q=${encodeURIComponent(q)}`)
+        .then(r => r.json())
+        .then(d => {
+          if (d.customers && d.customers.length) {
+            const grid = document.getElementById('apps-grid');
+            const results = d.customers.slice(0, 6).map(c => `
+              <div class="app-card" style="cursor:default">
+                <div class="app-icon sales">👤</div>
+                <div class="app-name">${c.name}</div>
+                <div class="app-desc">ランク: ${c.rank || '-'} | 担当: ${c.rep || '-'}${c.bank ? ' | '+c.bank : ''}</div>
+              </div>
+            `).join('');
+            grid.innerHTML = '<div style="grid-column:1/-1;margin-bottom:8px;font-size:13px;font-weight:600;color:var(--red)">顧客検索結果</div>' + results + '<div style="grid-column:1/-1;border-top:1px solid var(--border);margin:8px 0"></div>' + grid.innerHTML;
+          }
+        }).catch(() => {});
+    }, 400);
+  }
+});
+
+// --- Load Data ---
+async function loadLiveData() {
+  if (fetchController) fetchController.abort();
+  fetchController = new AbortController();
+  const signal = fetchController.signal;
+
+  try {
+    const res = await fetch(`${API}?type=pipeline`, { signal, timeout: 15000 });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    liveData = data;
+
+    renderKPI(data);
+    renderActions(data.deals);
+    renderPipeFlow(data.summary);
+    renderMonthly(data.summary ? data.summary.monthly : []);
+    renderDealFilters(data.deals);
+    renderDeals(data.deals);
+    renderReps(data.repStats);
+  } catch(e) {
+    if (e.name === 'AbortError') return;
+    ['kpi-grid','action-list','pipe-flow','deal-body','rep-grid'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.querySelector('.section-loading')) {
+        sectionError(id, e.message);
+      }
+    });
+  }
+}
+
+loadLiveData();
+refreshTimer = setInterval(loadLiveData, 5 * 60 * 1000);
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { clearInterval(refreshTimer); refreshTimer = null; }
+  else if (!refreshTimer) { loadLiveData(); refreshTimer = setInterval(loadLiveData, 5 * 60 * 1000); }
+});
+</script>
+</body>
+</html>
