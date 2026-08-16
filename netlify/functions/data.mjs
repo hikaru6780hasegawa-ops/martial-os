@@ -158,11 +158,21 @@ function parsePeriod(rows) {
   return { periods, forecast };
 }
 
-function parseDeals(rows) {
+function normName(v) {
+  return String(v || '').replace(/\s+/g, '').replace(/様$/, '').trim();
+}
+
+function parseDeals(rows, kessai = []) {
   if (rows.length < 2) return [];
-  return rows.slice(1).filter(r => r[1]).map(r => {
+  const scheduleByCustomer = new Map();
+  for (const item of kessai) {
+    const key = normName(item.customer);
+    if (key && !scheduleByCustomer.has(key)) scheduleByCustomer.set(key, item);
+  }
+  return rows.slice(1).filter(r => r[1]).map((r, index) => {
     const status = (r[2] || '-').trim();
     const completed = /^(決済|金消済)$/.test(status);
+    const linked = scheduleByCustomer.get(normName(r[1]));
     let priority = 'info';
     if (!completed) {
       if (/事前審査/.test(status)) priority = 'watch';
@@ -170,6 +180,7 @@ function parseDeals(rows) {
       else if (/承認/.test(status)) priority = 'action';
     }
     return {
+      id: `${r[0] || 'deal'}-${index}`,
       source: r[0] || '', customer: (r[1] || '').replace(/様$/, '') + '様',
       status, bank: r[3] || '',
       amount: cleanAmount(r[4]), amountRaw: r[4] || '',
@@ -177,6 +188,11 @@ function parseDeals(rows) {
       sales: cleanAmount(r[6]), salesRaw: r[6] || '',
       profit: cleanAmount(r[7]), profitRaw: r[7] || '',
       completed, priority,
+      rep: linked ? linked.rep : '',
+      settlementDate: linked ? linked.date : '',
+      branch: linked ? linked.branch : '',
+      propertyName: linked ? linked.property : '',
+      risk: linked ? linked.risk : '',
     };
   });
 }
@@ -229,7 +245,7 @@ export default async (req) => {
       result.dashboard = parseDashboard(dashRows);
       result.repStats = parseRepStats(repRows);
       result.period = parsePeriod(periodRows);
-      result.deals = parseDeals(dealRows);
+      result.deals = parseDeals(dealRows, result.kessai);
       result.annual = parseAnnual(annualRows);
     }
 
