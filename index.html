@@ -42,6 +42,7 @@ button{cursor:pointer;font:inherit;border:none;background:none}
 .greeting-date{font-size:13px;color:var(--sub);margin-bottom:4px}
 .greeting-text{font-size:26px;font-weight:700;color:var(--navy);margin-bottom:4px}
 .greeting-sub{font-size:14px;color:var(--sub)}
+.shortcut-hint{font-size:11px;color:var(--sub);margin-top:8px}
 .target-banner{background:var(--card);border-left:4px solid var(--red);border-radius:var(--radius);padding:16px 20px;margin-bottom:24px;box-shadow:var(--shadow)}
 .target-label{font-size:11px;font-weight:700;color:var(--red);letter-spacing:1px;margin-bottom:4px}
 .target-text{font-size:15px;color:var(--text)}
@@ -67,12 +68,14 @@ button{cursor:pointer;font:inherit;border:none;background:none}
 .section-error{background:#FEF2F2;border:1px solid #FECACA;border-radius:var(--radius);padding:16px;color:#991B1B;font-size:13px;display:flex;align-items:center;justify-content:space-between}
 .section-error button{background:var(--red);color:#fff;padding:6px 14px;border-radius:6px;font-size:12px}
 .section-loading{text-align:center;padding:24px;color:var(--sub);font-size:13px}
+.refresh-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;background:var(--card);border:1px solid var(--border);border-radius:8px;font-size:12px;color:var(--sub)}
+.refresh-btn:hover{color:var(--navy);border-color:var(--navy)}
+.refresh-btn[disabled]{opacity:.55;cursor:wait}
 
 /* KPI Grid */
 .kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:16px}
 .kpi-card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);text-align:center}
 .kpi-value{font-size:28px;font-weight:800;color:var(--navy);line-height:1.2}
-.kpi-value.red{color:var(--red)}
 .kpi-label{font-size:12px;color:var(--sub);margin-top:4px}
 .kpi-sub{font-size:11px;color:var(--sub);margin-top:2px}
 .kpi-card.highlight{border-left:4px solid var(--red)}
@@ -82,7 +85,8 @@ button{cursor:pointer;font:inherit;border:none;background:none}
 
 /* Action cards */
 .action-list{display:flex;flex-direction:column;gap:10px}
-.action-card{display:flex;align-items:stretch;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.action-card{display:flex;align-items:stretch;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;cursor:pointer;transition:box-shadow .15s}
+.action-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.1)}
 .action-priority{width:5px;flex-shrink:0}
 .action-priority.urgent{background:#EF4444}
 .action-priority.action{background:var(--orange)}
@@ -115,35 +119,64 @@ button{cursor:pointer;font:inherit;border:none;background:none}
 .c-orange{background:var(--orange)}.c-yellow{background:var(--yellow)}
 .c-red{background:#EF4444}.c-gray{background:#9CA3AF}
 
-/* Deal list */
+/* Deal filters & table */
 .deal-filters{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
 .deal-filter{padding:6px 12px;border-radius:6px;font-size:12px;color:var(--sub);background:var(--card);border:1px solid var(--border);transition:all .15s}
 .deal-filter:hover,.deal-filter.active{background:var(--navy);color:#fff;border-color:var(--navy)}
 .deal-count{font-size:12px;color:var(--sub);margin-bottom:8px}
+.filter-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:12px;display:grid;grid-template-columns:repeat(4,minmax(130px,1fr));gap:10px}
+.filter-control{width:100%;border:1px solid var(--border);border-radius:8px;background:#fff;padding:8px 10px;font:inherit;font-size:12px;color:var(--text)}
+.filter-toggles{display:flex;gap:8px;flex-wrap:wrap;grid-column:1/-1}
+.filter-toggle{padding:7px 10px;border:1px solid var(--border);border-radius:999px;font-size:12px;background:#fff}
+.filter-toggle.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.filter-chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.filter-chip{background:#EDE9FE;color:#4C1D95;border-radius:999px;padding:4px 9px;font-size:11px;cursor:pointer}
 .deal-table{width:100%;border-collapse:separate;border-spacing:0}
 .deal-table th{font-size:11px;color:var(--sub);font-weight:600;text-align:left;padding:8px 12px;border-bottom:2px solid var(--border);white-space:nowrap;cursor:pointer;user-select:none}
 .deal-table th:hover{color:var(--navy)}
 .deal-table td{font-size:13px;padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:middle}
 .deal-table tr:hover td{background:var(--hover)}
+.deal-table tbody tr{cursor:pointer}
 .deal-table .amt{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* Drawer */
+.drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:80}
+.drawer-overlay.show{display:block}
+.deal-drawer{position:fixed;right:0;top:0;width:min(480px,92vw);height:100vh;background:#fff;z-index:90;transform:translateX(100%);transition:transform .2s;box-shadow:-8px 0 30px rgba(0,0,0,.14);overflow:auto;padding:24px}
+.deal-drawer.show{transform:translateX(0)}
+.drawer-header{display:flex;justify-content:space-between;gap:12px;margin-bottom:20px}
+.drawer-title{font-size:22px;font-weight:800}
+.drawer-close{font-size:24px;padding:4px 10px}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.detail-item{background:var(--bg);border-radius:8px;padding:10px}
+.detail-label{font-size:11px;color:var(--sub)}
+.detail-value{font-size:14px;font-weight:600;word-break:break-word}
+.drawer-nav{display:flex;justify-content:space-between;margin-top:20px}
+.drawer-nav button{padding:8px 14px;border:1px solid var(--border);border-radius:8px}
+
+/* Quality */
+.quality-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.quality-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:13px;text-align:left;cursor:pointer}
+.quality-card:hover{border-color:var(--navy)}
+.quality-count{font-size:24px;font-weight:800}
+.quality-label{font-size:12px;color:var(--sub)}
 
 /* Monthly cards */
 .monthly-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
 .monthly-card{background:var(--card);border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow);cursor:pointer;transition:transform .15s}
 .monthly-card:hover{transform:translateY(-1px)}
-.monthly-card.active{border:2px solid var(--navy)}
 .month-label{font-size:15px;font-weight:600;margin-bottom:4px}
 .month-meta{font-size:13px;color:var(--sub)}
 
 /* Rep stats */
 .rep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
-.rep-card{background:var(--card);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow)}
+.rep-card{background:var(--card);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow);cursor:pointer}
+.rep-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.1)}
 .rep-name{font-size:14px;font-weight:600;margin-bottom:6px}
 .rep-stats{display:flex;gap:12px;font-size:12px;color:var(--sub)}
 .rep-stat-val{font-weight:700;color:var(--navy)}
 
 /* Schedule */
-.schedule-list{display:flex;flex-direction:column;gap:10px}
 .schedule-placeholder{text-align:center;padding:20px;color:var(--sub);font-size:13px;background:var(--card);border-radius:var(--radius);border:1px dashed var(--border)}
 
 /* Apps */
@@ -206,7 +239,10 @@ body.menu-open{overflow:hidden}
   .apps-grid{grid-template-columns:repeat(2,1fr)}
   .filter-bar,.deal-filters{overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}
   .deal-table{font-size:12px}
+  .deal-table th:nth-child(n+4),.deal-table td:nth-child(n+4){display:none}
   .rep-grid{grid-template-columns:repeat(2,1fr)}
+  .filter-panel{grid-template-columns:1fr 1fr}
+  .deal-drawer{width:100vw}
 }
 @media(min-width:769px){
   .mobile-header{display:none !important}
@@ -217,10 +253,7 @@ body.menu-open{overflow:hidden}
 
 <div class="layout">
   <aside class="sidebar" id="sidebar">
-    <div class="logo-area">
-      <div class="logo-mark">M</div>
-      <div class="logo-text">Martial OS<small>株式会社 Martial Arts</small></div>
-    </div>
+    <div class="logo-area"><div class="logo-mark">M</div><div class="logo-text">Martial OS<small>株式会社 Martial Arts</small></div></div>
     <nav>
       <div class="nav-section">
         <div class="nav-label">メイン</div>
@@ -237,24 +270,15 @@ body.menu-open{overflow:hidden}
         <a class="nav-item" href="https://docs.google.com/spreadsheets/d/1Uj_UtIs7ofFSuOcCN5iRsWt8yqhlsGRs7BTy8oUaamA" target="_blank"><span class="icon">📈</span>売上表</a>
       </div>
     </nav>
-    <div class="user-area">
-      <div class="user-avatar">長</div>
-      <div><div class="user-name">長谷川 光</div><div class="user-role">代表取締役 CEO</div></div>
-    </div>
-    <div class="sidebar-footer">
-      <div class="motto">「今ここにない未来は自分で創る」</div>
-      <div style="margin-top:4px">運命を共に創造する</div>
-    </div>
+    <div class="user-area"><div class="user-avatar">長</div><div><div class="user-name">長谷川 光</div><div class="user-role">代表取締役 CEO</div></div></div>
+    <div class="sidebar-footer"><div class="motto">「今ここにない未来は自分で創る」</div><div style="margin-top:4px">運命を共に創造する</div></div>
   </aside>
   <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
   <main class="main">
     <div class="mobile-header">
       <button id="menu-toggle" aria-expanded="false" aria-controls="sidebar" style="font-size:24px">☰</button>
-      <div class="logo-area" style="margin:0">
-        <div class="logo-mark" style="width:32px;height:32px;font-size:14px">M</div>
-        <div class="logo-text" style="font-size:13px">Martial OS</div>
-      </div>
+      <div class="logo-area" style="margin:0"><div class="logo-mark" style="width:32px;height:32px;font-size:14px">M</div><div class="logo-text" style="font-size:13px">Martial OS</div></div>
       <div style="width:24px"></div>
     </div>
 
@@ -262,80 +286,72 @@ body.menu-open{overflow:hidden}
       <div class="greeting-date" id="today-date"></div>
       <div class="greeting-text" id="greeting-text"></div>
       <div class="greeting-sub">今日やることと、会社のすべての入口をここに。</div>
+      <div class="shortcut-hint">ショートカット: / 検索　Esc 閉じる　← → 案件移動</div>
     </div>
 
-    <div class="target-banner">
-      <div class="target-label">TARGET 2030</div>
-      <div class="target-text">全社員の最低年収 <strong>1,000万円</strong>を実現</div>
-    </div>
+    <div class="target-banner"><div class="target-label">TARGET 2030</div><div class="target-text">全社員の最低年収 <strong>1,000万円</strong>を実現</div></div>
 
-    <div class="search-area">
-      <div class="search-box">
-        <input type="text" id="search-input" placeholder="顧客名・アプリ名・やりたいことから探す" autocomplete="off">
-        <button class="search-btn voice" onclick="openVoice()" aria-label="音声検索">🎙</button>
-      </div>
-    </div>
+    <div class="search-area"><div class="search-box"><input type="text" id="search-input" placeholder="顧客名・アプリ名・やりたいことから探す" autocomplete="off"><button class="search-btn voice" onclick="openVoice()" aria-label="音声検索">🎙</button></div></div>
 
     <!-- KPI -->
     <div class="section" id="kpi">
-      <div class="section-header">
-        <div><div class="section-title">KPI</div><div class="section-title-main">営業サマリー</div></div>
-        <div class="section-status" id="kpi-status"></div>
-      </div>
+      <div class="section-header"><div><div class="section-title">KPI</div><div class="section-title-main">営業サマリー</div></div><div><div class="section-status" id="kpi-status"></div><button class="refresh-btn" id="refresh-btn" onclick="loadLiveData(true)">↻ 今すぐ更新</button></div></div>
       <div class="kpi-grid" id="kpi-grid"><div class="section-loading">読み込み中...</div></div>
     </div>
 
     <!-- Today's Actions -->
     <div class="section" id="actions">
-      <div class="section-header">
-        <div><div class="section-title">TODAY'S ACTIONS</div><div class="section-title-main">対応が必要な案件</div></div>
-      </div>
+      <div class="section-header"><div><div class="section-title">TODAY'S ACTIONS</div><div class="section-title-main">対応が必要な案件</div></div></div>
       <div class="action-list" id="action-list"><div class="section-loading">読み込み中...</div></div>
     </div>
 
     <!-- Schedule -->
     <div class="section" id="schedule">
-      <div class="section-header">
-        <div><div class="section-title">TODAY</div><div class="section-title-main">今日の予定</div></div>
-      </div>
+      <div class="section-header"><div><div class="section-title">TODAY</div><div class="section-title-main">今日の予定</div></div></div>
       <div class="schedule-placeholder">Googleカレンダー未設定 — 次フェーズで連携予定</div>
     </div>
 
     <!-- Pipeline -->
     <div class="section" id="pipeline">
-      <div class="section-header">
-        <div><div class="section-title">PIPELINE</div><div class="section-title-main">決済見込パイプライン</div></div>
-        <a class="section-more" href="https://docs.google.com/spreadsheets/d/1Uj_UtIs7ofFSuOcCN5iRsWt8yqhlsGRs7BTy8oUaamA" target="_blank" rel="noopener">売上表を開く →</a>
-      </div>
+      <div class="section-header"><div><div class="section-title">PIPELINE</div><div class="section-title-main">決済見込パイプライン</div></div><a class="section-more" href="https://docs.google.com/spreadsheets/d/1Uj_UtIs7ofFSuOcCN5iRsWt8yqhlsGRs7BTy8oUaamA" target="_blank" rel="noopener">売上表を開く →</a></div>
       <div id="pipe-flow" class="pipe-flow"><div class="section-loading" style="width:100%">読み込み中...</div></div>
       <div class="monthly-grid" id="monthly-grid" style="margin-top:16px"></div>
     </div>
 
     <!-- Deals -->
     <div class="section" id="deals">
-      <div class="section-header">
-        <div><div class="section-title">DEALS</div><div class="section-title-main">案件一覧</div></div>
-      </div>
+      <div class="section-header"><div><div class="section-title">DEALS</div><div class="section-title-main">案件一覧</div></div></div>
       <div class="deal-filters" id="deal-filters"></div>
-      <div class="deal-count" id="deal-count"></div>
-      <div style="overflow-x:auto">
-        <table class="deal-table" id="deal-table"><tbody id="deal-body"><tr><td colspan="6" class="section-loading">読み込み中...</td></tr></tbody></table>
+      <div class="filter-panel">
+        <input class="filter-control" id="deal-query" type="search" placeholder="顧客名・銀行で検索">
+        <select class="filter-control" id="filter-status"><option value="">全ステータス</option></select>
+        <select class="filter-control" id="filter-rep"><option value="">全担当者</option></select>
+        <select class="filter-control" id="filter-bank"><option value="">全銀行</option></select>
+        <select class="filter-control" id="filter-amount"><option value="">全金額帯</option><option value="0-3000">3,000万未満</option><option value="3000-5000">3,000〜5,000万</option><option value="5000-999999">5,000万以上</option></select>
+        <select class="filter-control" id="filter-priority"><option value="">全優先度</option><option value="action">至急対応</option><option value="watch">要確認</option><option value="info">確認事項</option></select>
+        <button class="deal-filter" id="clear-filters">条件クリア</button>
+        <div class="filter-toggles"><button class="filter-toggle" data-toggle="active">進行中のみ</button><button class="filter-toggle" data-toggle="needsAction">対応必要のみ</button></div>
       </div>
+      <div class="filter-chips" id="filter-chips"></div>
+      <div class="deal-count" id="deal-count"></div>
+      <div style="overflow-x:auto"><table class="deal-table" id="deal-table"><tbody id="deal-body"><tr><td colspan="6" class="section-loading">読み込み中...</td></tr></tbody></table></div>
     </div>
 
     <!-- Rep Stats -->
     <div class="section" id="reps">
-      <div class="section-header">
-        <div><div class="section-title">TEAM</div><div class="section-title-main">担当者別</div></div>
-      </div>
+      <div class="section-header"><div><div class="section-title">TEAM</div><div class="section-title-main">担当者別</div></div></div>
       <div class="rep-grid" id="rep-grid"><div class="section-loading">読み込み中...</div></div>
+    </div>
+
+    <!-- Data Quality -->
+    <div class="section" id="data-quality">
+      <div class="section-header"><div><div class="section-title">DATA QUALITY</div><div class="section-title-main">データ確認</div></div></div>
+      <div class="quality-grid" id="quality-grid"><div class="section-loading">読み込み中...</div></div>
     </div>
 
     <!-- Apps -->
     <div class="section" id="apps">
-      <div class="section-header">
-        <div><div class="section-title">TOOLS</div><div class="section-title-main">何をしますか？</div></div>
-      </div>
+      <div class="section-header"><div><div class="section-title">TOOLS</div><div class="section-title-main">何をしますか？</div></div></div>
       <div class="filter-bar">
         <button class="filter-btn active" onclick="filterApps('all',this)">すべて</button>
         <button class="filter-btn" onclick="filterApps('sales',this)">営業</button>
@@ -349,30 +365,21 @@ body.menu-open{overflow:hidden}
       <div class="apps-grid" id="apps-grid"></div>
     </div>
 
-    <div class="section">
-      <div class="section-title" style="margin-bottom:12px">5 PILLARS</div>
-      <div class="pillars">
-        <div class="pillar"><span class="pillar-dot"></span>創造力</div>
-        <div class="pillar"><span class="pillar-dot"></span>協働</div>
-        <div class="pillar"><span class="pillar-dot"></span>顧客志向</div>
-        <div class="pillar"><span class="pillar-dot"></span>信念</div>
-        <div class="pillar"><span class="pillar-dot"></span>探求心</div>
-      </div>
-    </div>
+    <div class="section"><div class="section-title" style="margin-bottom:12px">5 PILLARS</div><div class="pillars"><div class="pillar"><span class="pillar-dot"></span>創造力</div><div class="pillar"><span class="pillar-dot"></span>協働</div><div class="pillar"><span class="pillar-dot"></span>顧客志向</div><div class="pillar"><span class="pillar-dot"></span>信念</div><div class="pillar"><span class="pillar-dot"></span>探求心</div></div></div>
   </main>
 </div>
 
-<div class="voice-modal" id="voice-modal" onclick="closeVoice(event)">
-  <div class="voice-inner" onclick="event.stopPropagation()">
-    <div class="voice-circle">🎙</div>
-    <div class="voice-text">聞いています...</div>
-    <button class="voice-close" onclick="closeVoice()">閉じる</button>
-  </div>
-</div>
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<aside class="deal-drawer" id="deal-drawer" aria-hidden="true">
+  <div class="drawer-header"><div><div class="section-title">DEAL DETAIL</div><div class="drawer-title" id="drawer-title"></div></div><button class="drawer-close" id="drawer-close" aria-label="閉じる">×</button></div>
+  <div class="detail-grid" id="drawer-content"></div>
+  <div class="drawer-nav"><button id="drawer-prev">← 前の案件</button><button id="drawer-next">次の案件 →</button></div>
+</aside>
+
+<div class="voice-modal" id="voice-modal" onclick="closeVoice(event)"><div class="voice-inner" onclick="event.stopPropagation()"><div class="voice-circle">🎙</div><div class="voice-text">聞いています...</div><button class="voice-close" onclick="closeVoice()">閉じる</button></div></div>
 
 <script>
-// --- Apps ---
-const APPS = [
+const APPS=[
   {name:'顧客管理',desc:'顧客情報・ランク・担当を一覧管理',icon:'👥',cat:'sales',url:'https://ma-customer-master.netlify.app/'},
   {name:'アポ報告',desc:'アポイント報告・スコアリング',icon:'📞',cat:'sales',url:'#'},
   {name:'商談報告',desc:'商談内容を報告・共有',icon:'🤝',cat:'sales',url:'#'},
@@ -390,349 +397,234 @@ const APPS = [
   {name:'外出報告',desc:'外出報告フォーム',icon:'🚗',cat:'ops',url:'https://docs.google.com/forms/d/e/1FAIpQLSdq7TYoHOYb-6tK7BVffhQETUs8KbqYianOJAZFEG0o64rFGQ/viewform'},
   {name:'案件報告',desc:'案件報告フォーム',icon:'📄',cat:'sales',url:'https://docs.google.com/forms/d/e/1FAIpQLScnifZiAYuPh2XDo4K5_YEWMldA6lc4H9t66qZPQ5sm6Iemyg/viewform'},
 ];
-
-let currentFilter = 'all';
-function renderApps(filter){
-  const grid = document.getElementById('apps-grid');
-  const q = document.getElementById('search-input').value.toLowerCase();
-  const filtered = APPS.filter(a => {
-    if(filter !== 'all' && a.cat !== filter) return false;
-    if(q && !a.name.toLowerCase().includes(q) && !a.desc.toLowerCase().includes(q)) return false;
-    return true;
-  });
-  grid.innerHTML = filtered.map(a => `
-    <a class="app-card" href="${a.url}" target="_blank" rel="noopener" data-cat="${a.cat}">
-      <div class="app-icon ${a.cat}">${a.icon}</div>
-      <div class="app-name">${a.name}</div>
-      <div class="app-desc">${a.desc}</div>
-    </a>
-  `).join('');
-}
-function filterApps(cat, btn){
-  currentFilter = cat;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  renderApps(cat);
-}
-
-// --- Voice ---
+let currentFilter='all';
+function renderApps(f){const g=document.getElementById('apps-grid'),q=document.getElementById('search-input').value.toLowerCase();g.innerHTML=APPS.filter(a=>(f==='all'||a.cat===f)&&(!q||a.name.toLowerCase().includes(q)||a.desc.toLowerCase().includes(q))).map(a=>`<a class="app-card" href="${a.url}" target="_blank" rel="noopener"><div class="app-icon ${a.cat}">${a.icon}</div><div class="app-name">${a.name}</div><div class="app-desc">${a.desc}</div></a>`).join('')}
+function filterApps(c,b){currentFilter=c;document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');renderApps(c)}
 function openVoice(){document.getElementById('voice-modal').classList.add('show')}
-function closeVoice(e){
-  if(!e || e.target === document.getElementById('voice-modal'))
-    document.getElementById('voice-modal').classList.remove('show');
-}
+function closeVoice(e){if(!e||e.target===document.getElementById('voice-modal'))document.getElementById('voice-modal').classList.remove('show')}
 
-// --- Mobile Menu ---
-const sidebarEl = document.getElementById('sidebar');
-const overlayEl = document.getElementById('sidebar-overlay');
-const menuBtn = document.getElementById('menu-toggle');
+// Mobile Menu
+const sidebarEl=document.getElementById('sidebar'),overlayEl=document.getElementById('sidebar-overlay'),menuBtn=document.getElementById('menu-toggle');
 function openMenu(){sidebarEl.classList.add('open');overlayEl.classList.add('show');document.body.classList.add('menu-open');menuBtn.setAttribute('aria-expanded','true')}
 function closeMenu(){sidebarEl.classList.remove('open');overlayEl.classList.remove('show');document.body.classList.remove('menu-open');menuBtn.setAttribute('aria-expanded','false')}
-menuBtn.addEventListener('click', () => sidebarEl.classList.contains('open') ? closeMenu() : openMenu());
-overlayEl.addEventListener('click', closeMenu);
-sidebarEl.querySelectorAll('.nav-item').forEach(l => l.addEventListener('click', closeMenu));
-window.matchMedia('(min-width:769px)').addEventListener('change', e => { if(e.matches) closeMenu() });
+menuBtn.addEventListener('click',()=>sidebarEl.classList.contains('open')?closeMenu():openMenu());
+overlayEl.addEventListener('click',closeMenu);
+sidebarEl.querySelectorAll('.nav-item').forEach(l=>l.addEventListener('click',closeMenu));
+window.matchMedia('(min-width:769px)').addEventListener('change',e=>{if(e.matches)closeMenu()});
 
-document.addEventListener('keydown', e => {
-  if(e.key === 'Escape'){closeVoice();closeMenu()}
-  if(e.key === '/' && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();document.getElementById('search-input').focus()}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeVoice();closeMenu();if(selectedDealId)closeDeal()}
+  if(selectedDealId&&e.key==='ArrowLeft')moveDeal(-1);
+  if(selectedDealId&&e.key==='ArrowRight')moveDeal(1);
+  if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();document.getElementById('search-input').focus()}
 });
 
-// --- Greeting ---
-function updateGreeting(){
-  const now = new Date();
-  const days = ['日','月','火','水','木','金','土'];
-  document.getElementById('today-date').textContent = now.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric'}) + `（${days[now.getDay()]}）`;
-  const h = now.getHours();
-  document.getElementById('greeting-text').textContent = (h < 12 ? 'おはようございます' : h < 18 ? 'お疲れさまです' : 'お疲れさまでした') + '、長谷川さん。';
-}
-updateGreeting();
+// Greeting
+(function(){
+  const now=new Date(),days=['日','月','火','水','木','金','土'];
+  document.getElementById('today-date').textContent=now.toLocaleDateString('ja-JP',{year:'numeric',month:'long',day:'numeric'})+`（${days[now.getDay()]}）`;
+  const h=now.getHours();
+  document.getElementById('greeting-text').textContent=(h<12?'おはようございます':h<18?'お疲れさまです':'お疲れさまでした')+'、長谷川さん。';
+})();
 renderApps('all');
 
 // ===== LIVE DATA =====
-const API = '/api/data';
-let liveData = null;
-let fetchController = null;
-let refreshTimer = null;
+const API='/api/data';
+let liveData=null,fetchController=null,refreshTimer=null;
+let filteredDeals=[],selectedDealId='',previousFocus=null;
+let dealFilter='all',dealSort={col:'amount',dir:-1};
+const dealFilters={q:'',status:'',rep:'',bank:'',amount:'',priority:'',active:false,needsAction:false};
 
-function fmtMan(v) {
-  if (!v && v !== 0) return '-';
-  const n = typeof v === 'number' ? v : parseInt(String(v).replace(/[,万円\s]/g,'')) || 0;
-  if (n >= 10000) return (n/10000).toFixed(1).replace(/\.0$/,'') + '億円';
-  return n.toLocaleString() + '万円';
+function esc(v){const d=document.createElement('div');d.textContent=String(v??'');return d.innerHTML}
+function fmtMan(v){if(!v&&v!==0)return'-';const n=typeof v==='number'?v:parseInt(String(v).replace(/[,万円\s]/g,''))||0;return n>=10000?(n/10000).toFixed(1).replace(/\.0$/,'')+'億円':n.toLocaleString()+'万円'}
+function sectionError(id,msg){const el=document.getElementById(id);if(el)el.innerHTML=`<div class="section-error"><span>取得エラー: ${msg}</span><button onclick="loadLiveData()">再試行</button></div>`}
+
+// KPI
+function renderKPI(data){
+  const el=document.getElementById('kpi-grid'),d=data.dashboard||{},k=d.kpi||{},p=data.period||{},s=data.summary||{},t=s.total||{};
+  const cards=[];
+  if(p.periods&&p.periods[0]){const cur=p.periods[0];cards.push({v:cur.salesOku,l:cur.name,sub:`${cur.months}経過`,cls:'period'});if(p.forecast&&p.forecast.prediction)cards.push({v:p.forecast.prediction.replace(/万円.*/,'万'),l:'着地予測',sub:p.forecast.yoy||'',cls:'period'})}
+  if(t.count)cards.push({v:t.count,l:'パイプライン',sub:fmtMan(parseInt(String(t.amount).replace(/[,万]/g,''))||0),cls:'highlight'});
+  if(k.totalCustomers)cards.push({v:k.totalCustomers.toLocaleString(),l:'総顧客数'});
+  if(k.sold)cards.push({v:k.sold.toLocaleString(),l:'販売済',sub:`成約率 ${k.conversionRate}`});
+  if(k.unsold)cards.push({v:k.unsold.toLocaleString(),l:'未販売'});
+  if(k.sPriority)cards.push({v:k.sPriority,l:'S優先',cls:'highlight'});
+  if(k.aPriority)cards.push({v:k.aPriority,l:'A優先'});
+  el.innerHTML=cards.map(c=>`<div class="kpi-card ${c.cls||''}"><div class="kpi-value">${c.v}</div><div class="kpi-label">${c.l}</div>${c.sub?`<div class="kpi-sub">${c.sub}</div>`:''}</div>`).join('');
+  if(d.lastUpdate)document.getElementById('kpi-status').textContent=`最終更新: ${d.lastUpdate}`;
 }
 
-function sectionError(id, msg) {
-  const el = document.getElementById(id);
-  if (el) el.innerHTML = `<div class="section-error"><span>取得エラー: ${msg}</span><button onclick="loadLiveData()">再試行</button></div>`;
-}
-
-// --- KPI ---
-function renderKPI(data) {
-  const el = document.getElementById('kpi-grid');
-  const d = data.dashboard || {};
-  const k = d.kpi || {};
-  const p = data.period || {};
-  const s = data.summary || {};
-  const t = s.total || {};
-
-  const cards = [];
-  if (p.periods && p.periods[0]) {
-    const cur = p.periods[0];
-    cards.push({v: cur.salesOku, l: `${cur.name}`, sub: `${cur.months}経過`, cls:'period'});
-    if (p.forecast && p.forecast.prediction) cards.push({v: p.forecast.prediction.replace(/万円.*/, '万'), l: '着地予測', sub: p.forecast.yoy || '', cls:'period'});
-  }
-  if (t.count) cards.push({v: t.count, l: 'パイプライン', sub: fmtMan(parseInt(String(t.amount).replace(/[,万]/g,''))||0), cls:'highlight'});
-  if (k.totalCustomers) cards.push({v: k.totalCustomers.toLocaleString(), l: '総顧客数'});
-  if (k.sold) cards.push({v: k.sold.toLocaleString(), l: '販売済', sub: `成約率 ${k.conversionRate}`});
-  if (k.unsold) cards.push({v: k.unsold.toLocaleString(), l: '未販売'});
-  if (k.sPriority) cards.push({v: k.sPriority, l: 'S優先', cls:'highlight'});
-  if (k.aPriority) cards.push({v: k.aPriority, l: 'A優先'});
-
-  el.innerHTML = cards.map(c => `
-    <div class="kpi-card ${c.cls||''}">
-      <div class="kpi-value">${c.v}</div>
-      <div class="kpi-label">${c.l}</div>
-      ${c.sub ? `<div class="kpi-sub">${c.sub}</div>` : ''}
-    </div>
-  `).join('');
-
-  const statusEl = document.getElementById('kpi-status');
-  if (d.lastUpdate) statusEl.textContent = `最終更新: ${d.lastUpdate}`;
-}
-
-// --- Actions ---
-function renderActions(deals) {
-  const el = document.getElementById('action-list');
-  const active = (deals || []).filter(d => !d.completed);
-  const badge = document.getElementById('action-badge');
-  badge.textContent = active.length || '0';
-
-  if (!active.length) {
-    el.innerHTML = '<div class="schedule-placeholder">対応が必要な案件はありません</div>';
-    return;
-  }
-  const sorted = active.sort((a,b) => {
-    const order = {action:0, watch:1, info:2};
-    return (order[a.priority]||2) - (order[b.priority]||2) || b.amount - a.amount;
-  });
-  el.innerHTML = sorted.map(d => {
-    const pLabel = d.priority === 'action' ? '要対応' : d.priority === 'watch' ? '確認' : '情報';
-    return `<div class="action-card">
-      <div class="action-priority ${d.priority}"></div>
-      <div class="action-body">
-        <div class="action-main">
-          <div class="action-customer">${d.customer}</div>
-          <div class="action-meta">
-            <span>${d.status}</span>
-            <span>${d.bank}</span>
-            <span>${d.source}</span>
-          </div>
-        </div>
-        <div class="action-amount">${fmtMan(d.amount)}</div>
-        <span class="action-badge ${d.priority}">${pLabel}</span>
-      </div>
-    </div>`;
+// Actions
+function renderActions(deals){
+  const el=document.getElementById('action-list'),active=(deals||[]).filter(d=>!d.completed);
+  document.getElementById('action-badge').textContent=active.length||'0';
+  if(!active.length){el.innerHTML='<div class="schedule-placeholder">対応が必要な案件はありません</div>';return}
+  const sorted=active.sort((a,b)=>{const o={action:0,watch:1,info:2};return(o[a.priority]||2)-(o[b.priority]||2)||b.amount-a.amount});
+  el.innerHTML=sorted.map(d=>{
+    const pLabel=d.priority==='action'?'至急対応':d.priority==='watch'?'要確認':'確認事項';
+    return`<div class="action-card" onclick="openDeal('${esc(d.id)}')"><div class="action-priority ${d.priority}"></div><div class="action-body"><div class="action-main"><div class="action-customer">${esc(d.customer)}</div><div class="action-meta"><span>${esc(d.status)}</span><span>${esc(d.bank)}</span><span>${esc(d.source)}</span></div></div><div class="action-amount">${fmtMan(d.amount)}</div><span class="action-badge ${d.priority}">${pLabel}</span></div></div>`;
   }).join('');
 }
 
-// --- Pipeline Flow ---
-function renderPipeFlow(summary) {
-  const el = document.getElementById('pipe-flow');
-  const items = (summary && summary.byStatus) || [];
-  const badge = document.getElementById('pipe-badge');
-  const total = summary && summary.total;
-  if (total) badge.textContent = total.count.replace(/[^0-9]/g,'');
-
-  if (!items.length) { el.innerHTML = '<div class="section-loading">データなし</div>'; return; }
-
-  const colors = {blue:'var(--blue)',green:'var(--green)',orange:'var(--orange)',yellow:'var(--yellow)',red:'#EF4444',gray:'#9CA3AF'};
-  el.innerHTML = items.map((s,i) => `
-    <div class="pipe-step" onclick="filterDealsByStatus('${s.label}')" tabindex="0" role="button" aria-label="${s.label} ${s.count}">
-      <div class="pipe-step-count">${s.count.replace(/[^0-9]/g,'')}</div>
-      <div class="pipe-step-label">${s.label}</div>
-      <div class="pipe-step-amount">${s.amount}</div>
-      <div class="pipe-step-bar" style="background:${colors[s.color]||'#9CA3AF'}"></div>
-    </div>
-  `).join('');
+// Pipeline
+function renderPipeFlow(summary){
+  const el=document.getElementById('pipe-flow'),items=(summary&&summary.byStatus)||[],total=summary&&summary.total;
+  if(total)document.getElementById('pipe-badge').textContent=total.count.replace(/[^0-9]/g,'');
+  if(!items.length){el.innerHTML='<div class="section-loading">データなし</div>';return}
+  const colors={blue:'var(--blue)',green:'var(--green)',orange:'var(--orange)',yellow:'var(--yellow)',red:'#EF4444',gray:'#9CA3AF'};
+  el.innerHTML=items.map(s=>`<div class="pipe-step" onclick="filterDealsByStatus('${esc(s.label)}')" tabindex="0" role="button"><div class="pipe-step-count">${s.count.replace(/[^0-9]/g,'')}</div><div class="pipe-step-label">${s.label}</div><div class="pipe-step-amount">${s.amount}</div><div class="pipe-step-bar" style="background:${colors[s.color]||'#9CA3AF'}"></div></div>`).join('');
 }
 
-// --- Monthly ---
-function renderMonthly(items) {
-  const el = document.getElementById('monthly-grid');
-  if (!items || !items.length) { el.innerHTML = ''; return; }
-  el.innerHTML = items.map(m => `
-    <div class="monthly-card">
-      <div class="month-label">${m.label}</div>
-      <div class="month-meta">${m.count} | ${m.amount}</div>
-      <div style="font-size:12px;color:var(--sub);margin-top:4px">${m.note || ''}</div>
-    </div>
-  `).join('');
+function renderMonthly(items){
+  const el=document.getElementById('monthly-grid');
+  if(!items||!items.length){el.innerHTML='';return}
+  el.innerHTML=items.map(m=>`<div class="monthly-card"><div class="month-label">${m.label}</div><div class="month-meta">${m.count} | ${m.amount}</div>${m.note?`<div style="font-size:12px;color:var(--sub);margin-top:4px">${m.note}</div>`:''}</div>`).join('');
 }
 
-// --- Deals Table ---
-let dealFilter = 'all';
-let dealSort = {col:'amount', dir:-1};
-
-function renderDeals(deals) {
-  const body = document.getElementById('deal-body');
-  const countEl = document.getElementById('deal-count');
-
-  let filtered = deals || [];
-  if (dealFilter !== 'all') {
-    if (dealFilter === 'active') filtered = filtered.filter(d => !d.completed);
-    else filtered = filtered.filter(d => d.status.includes(dealFilter));
-  }
-
-  filtered.sort((a,b) => {
-    const key = dealSort.col;
-    const av = typeof a[key] === 'number' ? a[key] : (a[key]||'');
-    const bv = typeof b[key] === 'number' ? b[key] : (b[key]||'');
-    return (av > bv ? 1 : av < bv ? -1 : 0) * dealSort.dir;
-  });
-
-  countEl.textContent = `${filtered.length}件表示 / 全${(deals||[]).length}件`;
-
-  if (!filtered.length) {
-    body.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--sub)">該当なし</td></tr>';
-    return;
-  }
-
-  const header = `<thead><tr>
-    <th onclick="sortDeals('customer')">顧客名</th>
-    <th onclick="sortDeals('status')">状況</th>
-    <th onclick="sortDeals('bank')">銀行</th>
-    <th onclick="sortDeals('amount')" style="text-align:right">融資額</th>
-    <th onclick="sortDeals('sales')" style="text-align:right">売上</th>
-    <th onclick="sortDeals('source')">元シート</th>
-  </tr></thead>`;
-
-  const rows = filtered.map(d => `<tr>
-    <td style="font-weight:600">${d.customer}</td>
-    <td><span class="status-dot c-${d.completed ? 'green' : d.priority === 'action' ? 'orange' : d.priority === 'watch' ? 'blue' : 'gray'}"></span>${d.status}</td>
-    <td>${d.bank}</td>
-    <td class="amt">${d.amountRaw || '-'}</td>
-    <td class="amt">${d.salesRaw || '-'}</td>
-    <td style="font-size:11px;color:var(--sub)">${d.source}</td>
-  </tr>`).join('');
-
-  const table = document.getElementById('deal-table');
-  table.innerHTML = header + '<tbody>' + rows + '</tbody>';
+// Deals
+function applyDealFilters(deals){
+  let out=[...(deals||[])];
+  if(dealFilter!=='all')out=out.filter(d=>dealFilter==='active'?!d.completed:d.status.includes(dealFilter));
+  const q=dealFilters.q.toLowerCase();
+  if(q)out=out.filter(d=>[d.customer,d.status,d.bank,d.source].some(v=>String(v||'').toLowerCase().includes(q)));
+  if(dealFilters.status)out=out.filter(d=>d.status===dealFilters.status);
+  if(dealFilters.rep)out=out.filter(d=>(d.rep||'未設定')===dealFilters.rep);
+  if(dealFilters.bank)out=out.filter(d=>(d.bank||'未設定')===dealFilters.bank);
+  if(dealFilters.priority)out=out.filter(d=>d.priority===dealFilters.priority);
+  if(dealFilters.active)out=out.filter(d=>!d.completed);
+  if(dealFilters.needsAction)out=out.filter(d=>!d.completed&&['action','watch'].includes(d.priority));
+  if(dealFilters.amount){const[lo,hi]=dealFilters.amount.split('-').map(Number);out=out.filter(d=>d.amount>=lo&&d.amount<hi)}
+  return out.sort((a,b)=>{const k=dealSort.col,av=typeof a[k]==='number'?a[k]:(a[k]||''),bv=typeof b[k]==='number'?b[k]:(b[k]||'');return(av>bv?1:av<bv?-1:0)*dealSort.dir});
 }
 
-function renderDealFilters(deals) {
-  const el = document.getElementById('deal-filters');
-  const statuses = [...new Set((deals||[]).map(d => d.status).filter(s => s && s !== '-'))];
-  const buttons = [
-    {key:'all', label:'すべて'},
-    {key:'active', label:'進行中'},
-    ...statuses.slice(0,6).map(s => ({key:s, label:s}))
+function renderDeals(deals){
+  filteredDeals=applyDealFilters(deals);
+  document.getElementById('deal-count').textContent=`${filteredDeals.length}件表示 / 全${(deals||[]).length}件`;
+  if(!filteredDeals.length){document.getElementById('deal-table').innerHTML='<tbody><tr><td colspan="6" style="text-align:center;padding:24px;color:var(--sub)">該当なし</td></tr></tbody>';renderFilterChips();return}
+  document.getElementById('deal-table').innerHTML=`<thead><tr><th onclick="sortDeals('customer')">顧客名</th><th onclick="sortDeals('status')">状況</th><th onclick="sortDeals('bank')">銀行</th><th onclick="sortDeals('amount')" style="text-align:right">融資額</th><th onclick="sortDeals('sales')" style="text-align:right">売上</th><th onclick="sortDeals('source')">元シート</th></tr></thead><tbody>`+filteredDeals.map(d=>`<tr data-id="${esc(d.id)}" onclick="openDeal('${esc(d.id)}',this)"><td style="font-weight:600">${esc(d.customer)}</td><td><span class="status-dot c-${d.completed?'green':d.priority==='action'?'orange':d.priority==='watch'?'blue':'gray'}"></span>${esc(d.status)}</td><td>${esc(d.bank||'-')}</td><td class="amt">${d.amountRaw||'-'}</td><td class="amt">${d.salesRaw||'-'}</td><td style="font-size:11px;color:var(--sub)">${esc(d.source)}</td></tr>`).join('')+'</tbody>';
+  renderFilterChips();
+}
+
+function renderFilterChips(){
+  const labels={q:'検索',status:'状況',rep:'担当',bank:'銀行',amount:'金額',priority:'優先度',active:'進行中',needsAction:'対応必要'};
+  document.getElementById('filter-chips').innerHTML=Object.entries(dealFilters).filter(([,v])=>v).map(([k,v])=>`<button class="filter-chip" onclick="clearOneFilter('${k}')">${labels[k]||k}: ${v===true?'ON':esc(v)} ×</button>`).join('');
+}
+function clearOneFilter(k){dealFilters[k]=typeof dealFilters[k]==='boolean'?false:'';initAdvancedFilters(liveData.deals);renderDeals(liveData.deals)}
+
+function fillSelect(id,values,current){const el=document.getElementById(id);if(!el)return;const first=el.options[0].outerHTML;el.innerHTML=first+[...new Set(values.map(v=>v||'未設定'))].sort().map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('');el.value=current||''}
+function initAdvancedFilters(deals){
+  fillSelect('filter-status',(deals||[]).map(d=>d.status),dealFilters.status);
+  fillSelect('filter-rep',(deals||[]).map(d=>d.rep),dealFilters.rep);
+  fillSelect('filter-bank',(deals||[]).map(d=>d.bank),dealFilters.bank);
+  document.getElementById('deal-query').value=dealFilters.q;
+  ['status','rep','bank','amount','priority'].forEach(k=>{const e=document.getElementById('filter-'+k);if(e)e.value=dealFilters[k]});
+  document.querySelectorAll('[data-toggle]').forEach(b=>b.classList.toggle('active',!!dealFilters[b.dataset.toggle]));
+}
+
+function renderDealFilters(deals){
+  const el=document.getElementById('deal-filters'),statuses=[...new Set((deals||[]).map(d=>d.status).filter(s=>s&&s!=='-'))];
+  el.innerHTML=[{key:'all',label:'すべて'},{key:'active',label:'進行中'},...statuses.slice(0,6).map(s=>({key:s,label:s}))].map(b=>`<button class="deal-filter${dealFilter===b.key?' active':''}" onclick="setDealFilter('${esc(b.key)}',this)">${b.label}</button>`).join('');
+}
+function setDealFilter(key,btn){dealFilter=key;document.querySelectorAll('#deal-filters .deal-filter').forEach(b=>b.classList.remove('active'));if(btn)btn.classList.add('active');if(liveData)renderDeals(liveData.deals)}
+function filterDealsByStatus(label){dealFilter='all';dealFilters.status=label;if(liveData){renderDealFilters(liveData.deals);initAdvancedFilters(liveData.deals);renderDeals(liveData.deals)}document.getElementById('deals').scrollIntoView({behavior:'smooth'})}
+function sortDeals(col){if(dealSort.col===col)dealSort.dir*=-1;else{dealSort.col=col;dealSort.dir=col==='amount'||col==='sales'?-1:1}if(liveData)renderDeals(liveData.deals)}
+
+// Advanced filter events
+document.querySelectorAll('.filter-control').forEach(el=>el.addEventListener(el.tagName==='INPUT'?'input':'change',()=>{const map={'deal-query':'q','filter-status':'status','filter-rep':'rep','filter-bank':'bank','filter-amount':'amount','filter-priority':'priority'};dealFilters[map[el.id]]=el.value;renderDeals(liveData.deals)}));
+document.querySelectorAll('[data-toggle]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.toggle;dealFilters[k]=!dealFilters[k];b.classList.toggle('active',dealFilters[k]);renderDeals(liveData.deals)}));
+document.getElementById('clear-filters').addEventListener('click',()=>{Object.keys(dealFilters).forEach(k=>dealFilters[k]=typeof dealFilters[k]==='boolean'?false:'');dealFilter='all';if(liveData){initAdvancedFilters(liveData.deals);renderDealFilters(liveData.deals);renderDeals(liveData.deals)}});
+
+// Deal Drawer
+function openDeal(id,trigger){
+  const d=(liveData?.deals||[]).find(x=>x.id===id);if(!d)return;
+  selectedDealId=id;previousFocus=trigger||document.activeElement;
+  document.getElementById('drawer-title').textContent=d.customer;
+  const pl={action:'至急対応',watch:'要確認',info:'確認事項'}[d.priority]||'-';
+  const fields=[['状況',d.status],['優先度',pl],['銀行',d.bank||'-'],['融資額',d.amountRaw||'-'],['売上',d.salesRaw||'-'],['物件',d.propertyRaw||'-'],['元シート',d.source||'-']];
+  document.getElementById('drawer-content').innerHTML=fields.map(([l,v])=>`<div class="detail-item"><div class="detail-label">${l}</div><div class="detail-value">${esc(v)}</div></div>`).join('');
+  document.getElementById('deal-drawer').classList.add('show');
+  document.getElementById('drawer-overlay').classList.add('show');
+  document.body.classList.add('menu-open');
+  document.getElementById('drawer-close').focus();
+}
+function closeDeal(){selectedDealId='';document.getElementById('deal-drawer').classList.remove('show');document.getElementById('drawer-overlay').classList.remove('show');document.body.classList.remove('menu-open');if(previousFocus)previousFocus.focus()}
+function moveDeal(dir){const i=filteredDeals.findIndex(d=>d.id===selectedDealId),next=filteredDeals[i+dir];if(next)openDeal(next.id)}
+document.getElementById('drawer-close').addEventListener('click',closeDeal);
+document.getElementById('drawer-overlay').addEventListener('click',closeDeal);
+document.getElementById('drawer-prev').addEventListener('click',()=>moveDeal(-1));
+document.getElementById('drawer-next').addEventListener('click',()=>moveDeal(1));
+
+// Rep Stats
+function renderReps(repData){
+  const el=document.getElementById('rep-grid'),reps=(repData&&repData.reps)||[];
+  if(!reps.length){el.innerHTML='<div class="section-loading">データなし</div>';return}
+  el.innerHTML=reps.map(r=>`<div class="rep-card" onclick="dealFilters.rep='${esc(r.name)}';initAdvancedFilters(liveData.deals);renderDeals(liveData.deals);document.getElementById('deals').scrollIntoView({behavior:'smooth'})"><div class="rep-name">${r.name}</div><div class="rep-stats"><span><span class="rep-stat-val">${r.total}</span>件</span><span>成約<span class="rep-stat-val">${r.rate}</span></span><span>HOT<span class="rep-stat-val">${r.hot}</span></span></div></div>`).join('');
+}
+
+// Data Quality
+function renderQuality(deals){
+  const items=[
+    {label:'担当者未設定',count:(deals||[]).filter(d=>!d.rep).length},
+    {label:'ステータス未設定',count:(deals||[]).filter(d=>!d.status||d.status==='-').length},
+    {label:'融資額未入力',count:(deals||[]).filter(d=>!d.amount).length},
+    {label:'銀行未設定',count:(deals||[]).filter(d=>!d.bank).length},
   ];
-  el.innerHTML = buttons.map(b => `<button class="deal-filter${dealFilter===b.key?' active':''}" onclick="setDealFilter('${b.key}',this)">${b.label}</button>`).join('');
+  document.getElementById('quality-grid').innerHTML=items.map(x=>`<div class="quality-card"><div class="quality-count">${x.count}</div><div class="quality-label">${x.label}</div></div>`).join('');
 }
 
-function setDealFilter(key, btn) {
-  dealFilter = key;
-  document.querySelectorAll('.deal-filter').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  if (liveData) renderDeals(liveData.deals);
-}
-
-function filterDealsByStatus(label) {
-  dealFilter = label;
-  if (liveData) {
-    renderDealFilters(liveData.deals);
-    renderDeals(liveData.deals);
-  }
-  document.getElementById('deals').scrollIntoView({behavior:'smooth'});
-}
-
-function sortDeals(col) {
-  if (dealSort.col === col) dealSort.dir *= -1;
-  else { dealSort.col = col; dealSort.dir = col === 'amount' || col === 'sales' ? -1 : 1; }
-  if (liveData) renderDeals(liveData.deals);
-}
-
-// --- Rep Stats ---
-function renderReps(repData) {
-  const el = document.getElementById('rep-grid');
-  const reps = (repData && repData.reps) || [];
-  if (!reps.length) { el.innerHTML = '<div class="section-loading">データなし</div>'; return; }
-  el.innerHTML = reps.map(r => `
-    <div class="rep-card">
-      <div class="rep-name">${r.name}</div>
-      <div class="rep-stats">
-        <span><span class="rep-stat-val">${r.total}</span>件</span>
-        <span>成約<span class="rep-stat-val">${r.rate}</span></span>
-        <span>HOT<span class="rep-stat-val">${r.hot}</span></span>
-      </div>
-    </div>
-  `).join('');
-}
-
-// --- Customer Search ---
+// Customer Search
 let searchTimer;
-document.getElementById('search-input').addEventListener('input', function() {
-  renderApps(currentFilter);
-  clearTimeout(searchTimer);
-  const q = this.value.trim();
-  if (q.length >= 2) {
-    searchTimer = setTimeout(() => {
-      fetch(`${API}?type=customers&q=${encodeURIComponent(q)}`)
-        .then(r => r.json())
-        .then(d => {
-          if (d.customers && d.customers.length) {
-            const grid = document.getElementById('apps-grid');
-            const results = d.customers.slice(0, 6).map(c => `
-              <div class="app-card" style="cursor:default">
-                <div class="app-icon sales">👤</div>
-                <div class="app-name">${c.name}</div>
-                <div class="app-desc">ランク: ${c.rank || '-'} | 担当: ${c.rep || '-'}${c.bank ? ' | '+c.bank : ''}</div>
-              </div>
-            `).join('');
-            grid.innerHTML = '<div style="grid-column:1/-1;margin-bottom:8px;font-size:13px;font-weight:600;color:var(--red)">顧客検索結果</div>' + results + '<div style="grid-column:1/-1;border-top:1px solid var(--border);margin:8px 0"></div>' + grid.innerHTML;
-          }
-        }).catch(() => {});
-    }, 400);
-  }
+document.getElementById('search-input').addEventListener('input',function(){
+  renderApps(currentFilter);clearTimeout(searchTimer);
+  const q=this.value.trim();
+  if(q.length>=2){searchTimer=setTimeout(()=>{
+    fetch(`${API}?type=customers&q=${encodeURIComponent(q)}`).then(r=>r.json()).then(d=>{
+      if(d.customers&&d.customers.length){const grid=document.getElementById('apps-grid');
+        grid.innerHTML='<div style="grid-column:1/-1;margin-bottom:8px;font-size:13px;font-weight:600;color:var(--red)">顧客検索結果</div>'+d.customers.slice(0,6).map(c=>`<div class="app-card" style="cursor:default"><div class="app-icon sales">👤</div><div class="app-name">${c.name}</div><div class="app-desc">ランク: ${c.rank||'-'} | 担当: ${c.rep||'-'}${c.bank?' | '+c.bank:''}</div></div>`).join('')+'<div style="grid-column:1/-1;border-top:1px solid var(--border);margin:8px 0"></div>'+grid.innerHTML;
+      }
+    }).catch(()=>{});
+  },400)}
 });
 
-// --- Load Data ---
-async function loadLiveData() {
-  if (fetchController) fetchController.abort();
-  fetchController = new AbortController();
-  const signal = fetchController.signal;
-
-  try {
-    const res = await fetch(`${API}?type=pipeline`, { signal, timeout: 15000 });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    if (data.error) throw new Error(data.error);
-    liveData = data;
-
+// Load Data
+async function loadLiveData(manual){
+  if(fetchController)fetchController.abort();
+  fetchController=new AbortController();
+  const btn=document.getElementById('refresh-btn');
+  if(btn){btn.disabled=true;btn.textContent='↻ 更新中...'}
+  try{
+    const res=await fetch(`${API}?type=pipeline`,{signal:fetchController.signal});
+    if(!res.ok)throw new Error(`HTTP ${res.status}`);
+    const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    liveData=data;
+    // Add IDs to deals
+    (data.deals||[]).forEach((d,i)=>{d.id=d.id||`deal-${i}`});
     renderKPI(data);
     renderActions(data.deals);
     renderPipeFlow(data.summary);
-    renderMonthly(data.summary ? data.summary.monthly : []);
+    renderMonthly(data.summary?data.summary.monthly:[]);
     renderDealFilters(data.deals);
+    initAdvancedFilters(data.deals);
     renderDeals(data.deals);
     renderReps(data.repStats);
-  } catch(e) {
-    if (e.name === 'AbortError') return;
-    ['kpi-grid','action-list','pipe-flow','deal-body','rep-grid'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el && el.querySelector('.section-loading')) {
-        sectionError(id, e.message);
-      }
+    renderQuality(data.deals);
+  }catch(e){
+    if(e.name==='AbortError')return;
+    ['kpi-grid','action-list','pipe-flow','deal-body','rep-grid','quality-grid'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el&&el.querySelector('.section-loading'))sectionError(id,e.message);
     });
+  }finally{
+    if(btn){btn.disabled=false;btn.textContent='↻ 今すぐ更新'}
   }
 }
 
 loadLiveData();
-refreshTimer = setInterval(loadLiveData, 5 * 60 * 1000);
-document.addEventListener('visibilitychange', () => {
-  if (document.hidden) { clearInterval(refreshTimer); refreshTimer = null; }
-  else if (!refreshTimer) { loadLiveData(); refreshTimer = setInterval(loadLiveData, 5 * 60 * 1000); }
+refreshTimer=setInterval(loadLiveData,5*60*1000);
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){clearInterval(refreshTimer);refreshTimer=null}
+  else if(!refreshTimer){loadLiveData();refreshTimer=setInterval(loadLiveData,5*60*1000)}
 });
 </script>
 </body>
